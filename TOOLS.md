@@ -50,7 +50,7 @@ No benchmark timings were collected in these checks.
 
 | Tool | Use and changes |
 |:---:|---|
-| Claude Code (Claude Opus 5.5) | Assisted with the adversary generators and checker, the delete-order search, the D5 proof draft with insert diagrams, the planted-fault and proof-check scripts, and PDF export. Jay had each module and proof explained, and asked for an extra verification pass with an independent review. The review found no correctness bugs and led to the added tie, join and deletion tests. |
+| Claude Code (Claude Opus 5.5) | Assisted with the adversary generators and checker, the delete-order search, the D5 proof draft with insert diagrams, the planted-fault and proof-check scripts, and PDF export. An independent review was run which found no correctness bugs and led to the added tie, join and deletion tests. |
 | MinGW-w64 g++ 16.2.0 (C++17) | Compiled and ran the adversarial checker (sizes 1 to 10,000), the delete-order search (every n up to 3,000, plus n = 1,000,000) and 15 planted-fault checks against the AVL on `main`, including debug and `-O3` builds. All passed; output is in `scratch/scratch-e/member5-test-results.txt`. |
 | Python, Chrome and PyMuPDF | Checked the D5 lemmas and worked example numerically (`proof_checks.py`), exported D5.pdf from D5.md and rendered its pages for visual inspection. |
 
