@@ -1,0 +1,47 @@
+Member 5 (Adversary) test results
+Machine: Windows 11, g++.exe (MinGW-W64 x86_64-ucrt-posix-seh, built by Brecht Sanders, r2) 16.2.0, flags -std=c++17 -O2 -Wall -Wextra -Wpedantic
+Date: 2026-11-14. Code: branch member5-adversary on top of main c58fbb0.
+
+== ./build/adversarial.exe 1 2 3 4 5 7 8 15 16 100 500 1000 1023 1024 10000
+PASS join rejects overlapping keys and leaves its inputs intact
+PASS n=1  insert rotations 0 (0.0000 per insert, predicted 0: match)  delete rotations 0 (0.0000 per delete; one-end order 0, 0.0000)  joins 10 shapes
+PASS n=2  insert rotations 0 (0.0000 per insert, predicted 0: match)  delete rotations 0 (0.0000 per delete; one-end order 0, 0.0000)  joins 10 shapes
+PASS n=3  insert rotations 1 (0.3333 per insert, predicted 1: match)  delete rotations 0 (0.0000 per delete; one-end order 0, 0.0000)  joins 10 shapes
+PASS n=4  insert rotations 1 (0.2500 per insert, predicted 1: match)  delete rotations 1 (0.2500 per delete; one-end order 1, 0.2500)  joins 10 shapes
+PASS n=5  insert rotations 2 (0.4000 per insert, predicted 2: match)  delete rotations 2 (0.4000 per delete; one-end order 1, 0.2000)  joins 10 shapes
+PASS n=7  insert rotations 4 (0.5714 per insert, predicted 4: match)  delete rotations 3 (0.4286 per delete; one-end order 1, 0.1429)  joins 10 shapes
+PASS n=8  insert rotations 4 (0.5000 per insert, predicted 4: match)  delete rotations 4 (0.5000 per delete; one-end order 2, 0.2500)  joins 10 shapes
+PASS n=15  insert rotations 11 (0.7333 per insert, predicted 11: match)  delete rotations 10 (0.6667 per delete; one-end order 4, 0.2667)  joins 10 shapes
+PASS n=16  insert rotations 11 (0.6875 per insert, predicted 11: match)  delete rotations 11 (0.6875 per delete; one-end order 5, 0.3125)  joins 10 shapes
+PASS n=100  insert rotations 93 (0.9300 per insert, predicted 93: match)  delete rotations 93 (0.9300 per delete; one-end order 44, 0.4400)  joins 10 shapes
+PASS n=500  insert rotations 491 (0.9820 per insert, predicted 491: match)  delete rotations 491 (0.9820 per delete; one-end order 242, 0.4840)  joins 10 shapes
+PASS n=1000  insert rotations 990 (0.9900 per insert, predicted 990: match)  delete rotations 990 (0.9900 per delete; one-end order 491, 0.4910)  joins 10 shapes
+PASS n=1023  insert rotations 1013 (0.9902 per insert, predicted 1013: match)  delete rotations 1012 (0.9892 per delete; one-end order 502, 0.4907)  joins 10 shapes
+PASS n=1024  insert rotations 1013 (0.9893 per insert, predicted 1013: match)  delete rotations 1013 (0.9893 per delete; one-end order 503, 0.4912)  joins 10 shapes
+PASS n=10000  insert rotations 9986 (0.9986 per insert, predicted 9986: match)  delete rotations 9986 (0.9986 per delete; one-end order 4988, 0.4988)  joins 10 shapes
+exit code 0
+
+== ./build/delete_search.exe
+mirror matches the real Avl rotation count on 200 random insert/delete sequences
+
+Greedy picks, as the rank among live keys (0 = first live key):
+  n=12  8 rotations, picks: 2 0 0 0 2 0 0 0 2 0 0 0
+  n=20  15 rotations, picks: 2 0 0 0 2 0 0 0 2 0 0 0 2 0 0 0 2 0 0 0
+  n=40  34 rotations, picks: 2 0 0 0 2 0 0 0 2 0 0 0 2 0 0 0 2 0 0 0 2 0 0 0 2 0 0 0 2 0 0 0 2 0 0 0 2 0 0 0
+
+Greedy versus the fixed families (rotations per delete):
+       n   greedy     blocks    one end   n-bitlen
+      63       56         56         26         57
+     100       93         93         44         93
+     127      119        119         57        120
+     200      192        192         93        192
+     255      246        246        120        247
+     500      491        491        242        491
+
+rotation_deletes, every n = 1..3000: >= n-bitlen(n): 2250 sizes, exactly one less: 750, worse: 0
+
+Large sizes (real Avl, no per-step audit):
+  n=10000    blocks     9986 (0.9986 per delete)   one end     4988 (0.4988)
+  n=100000   blocks    99983 (0.9998 per delete)   one end    49984 (0.4998)
+  n=1000000  blocks   999980 (1.0000 per delete)   one end   499981 (0.5000)
+exit code 0
