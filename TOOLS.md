@@ -1,6 +1,6 @@
 # Tools and implementation record
 
-# Member 1: Chaitanya Sharma (250001018) - Structure A
+# Member 1: Chaitanya Sharma (250001020) - Structure A
 Tool	Use and changes
 OpenAI Codex	Assisted with the AVL implementation updates, INTERFACE.md documentation, D1 proof rewrite with height-case diagrams, adversary test harness and PDF export. Chaitanya reviewed the provided AVL header, implementation, derivation draft and member checklist, and directed changes to join precondition validation and proof structure.
 MinGW g++.exe (C++17)	Attempted to compile and run the 10,000-entry audit in adversary/check.cpp. The compiler could not start because Windows reported "Illegal System DLL Relocation"; no alternative C++ compiler is installed on the machine. The harness is included for execution in the integrated build environment.
