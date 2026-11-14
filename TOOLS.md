@@ -32,3 +32,14 @@ No benchmark timings were collected in these checks.
 | MSYS2 g++ 16.2.0 | Compiled and ran the hash and application tests, 40,000 randomized AVL updates, 120,000 Fenwick updates, and a replay with 1,000,000 players and 1,000,000 revisions against the in-repository modules. All passed. |
 
 No benchmark timings were collected in these checks.
+
+---
+
+## Member 4: Herin Patel - Oracle
+
+| Tool | Use and changes |
+|:---:|---|
+| OpenAI Codex | Integrated the supplied sorted-array oracle, corrected removal exception comparison, added independent ordering and targeted edge cases, expanded D4, and updated the Member 4 and project READMEs. Existing application and structure code was preserved. |
+| MinGW g++ 6.3.0 | Attempted the integrated C++17 build. Compilation stopped because this compiler lacks `std::optional` and structured bindings required by the existing project; runtime checks are not claimed. An Ubuntu WSL fallback also had no `g++` installed. See `scratch/scratch-d/member4-test-results.txt`. |
+
+No benchmark timings were collected in these checks.
