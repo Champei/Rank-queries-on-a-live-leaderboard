@@ -43,3 +43,15 @@ No benchmark timings were collected in these checks.
 | MinGW g++ 6.3.0 | Attempted the integrated C++17 build. Compilation stopped because this compiler lacks `std::optional` and structured bindings required by the existing project; runtime checks are not claimed. An Ubuntu WSL fallback also had no `g++` installed. See `scratch/scratch-d/member4-test-results.txt`. |
 
 No benchmark timings were collected in these checks.
+
+---
+
+## Member 5: Jay Gupta - Adversary
+
+| Tool | Use and changes |
+|:---:|---|
+| Claude Code (Anthropic, Claude Opus 5.5) | Explained the starter code and the AVL, Fenwick and application modules. Wrote the `adversary/check.cpp` extensions: rotation reporting, split side checks, 10 join shapes, random score splits and the overlapping-join rejection test. Added `ordered_join_case`. Ran a greedy delete search (`scratch/scratch-e/delete_search.cpp`) that produced the new `rotation_deletes` order. Drafted D5: the sorted-insert rotation proof, the join height lemma, the split telescoping proof and the insert diagrams. Wrote `export_d5.py`. Own review and edits: [Jay to fill in before submission]. |
+| MinGW-w64 `g++` 16.2.0 (C++17, `-O2 -Wall -Wextra -Wpedantic`) | Compiled and ran `adversarial.exe` for n = 1 to 10,000 and `delete_search.exe`, which checks every n up to 3000 and n = 1,000,000, against Member 1's AVL on `main`. All passed; output is in `scratch/scratch-e/member5-test-results.txt`. Also ran the checker against the original starter AVL, which has no join validation: the overlap test correctly failed. |
+| Python 3.13 | A Python copy of the AVL insert, join and split code checked the D5 insert lemmas for every k up to 3000 and the worked split example. This script is not committed. `python-markdown` and headless Chrome export `D5.pdf`, and PyMuPDF rendered its pages for a visual check. |
+
+No benchmark timings were collected in these checks.
