@@ -1,7 +1,7 @@
 // Deterministic randomized checks for the Structure A AVL module.
 // The historical filename is retained to match the requested scratch layout.
 #define main practice_example_main
-#include "scratch/mine.cpp"
+#include "mine.cpp"
 #undef main
 #include "src/structA/avl.hpp"
 #include <algorithm>

@@ -1,6 +1,6 @@
 # Leaderboard interface and invariants
 
-Shared contract for six-member integration. Language: C++17. Structure B is present; Structure A is pending in this checkout.
+Shared contract for six-member integration. Language: C++17. Structures A and B are present in this checkout.
 
 ## Ordering and ranks
 

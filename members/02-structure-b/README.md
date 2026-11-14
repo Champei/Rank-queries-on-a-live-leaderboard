@@ -2,7 +2,7 @@
 
 Own `src/structB/fenwick.hpp`, `src/structB/fenwick.cpp` and `docs/derivations/D2.md`/`D2.pdf`. The Fenwick stores counts over a fixed, compressed score universe. It returns competition ranks and selected scores; the AVL resolves player IDs and their tie order.
 
-The implementation and proof are AI-assisted; see `TOOLS.md`. Review the proof and practise modifying the module before the viva. The GitHub contribution is pending until a branch and PR exist in the team's repository.
+The implementation and proof are AI-assisted; see `TOOLS.md`. Review the proof and practise modifying the module before the viva. This module is present in the shared repository.
 
 ## Run from the project root on macOS
 
@@ -11,8 +11,8 @@ The implementation and proof are AI-assisted; see `TOOLS.md`. Review the proof a
 Practice example:
 
 ```bash
-g++ -std=c++17 scratch/mine.cpp -o scratch/mine
-./scratch/mine
+g++ -std=c++17 scratch/scratch-b/mine.cpp -o scratch/scratch-b/mine
+./scratch/scratch-b/mine
 ```
 
 Expected values: bit `2 2 1 6 0`, ranks `1 4 5 5`, selected scores `40 40 40 30 10 10`, practice audit `1`. The class's audit instead returns the player count.
@@ -20,8 +20,8 @@ Expected values: bit `2 2 1 6 0`, ranks `1 4 5 5`, selected scores `40 40 40 30 
 Random checks of both practice code and integrated Fenwick against a sorted array:
 
 ```bash
-g++ -std=c++17 -Wall -Wextra -Wpedantic -I. src/structB/fenwick.cpp scratch/fenwick_random.cpp -o scratch/fenwick_random
-./scratch/fenwick_random
+g++ -std=c++17 -Wall -Wextra -Wpedantic -I. src/structB/fenwick.cpp scratch/scratch-b/fenwick_random.cpp -o scratch/scratch-b/fenwick_random
+./scratch/scratch-b/fenwick_random
 ```
 
 Expected success: `PASS 120000 random updates (300 universes x 400), seed 253; edge cases passed`.
@@ -29,18 +29,18 @@ Expected success: `PASS 120000 random updates (300 universes x 400), seed 253; e
 Integrated application:
 
 ```bash
-g++ -std=c++17 -Wall -Wextra -Wpedantic -I. src/structA/avl.cpp src/structB/fenwick.cpp app/player_hash.cpp app/leaderboard.cpp app/main.cpp -o scratch/leaderboard_app
-./scratch/leaderboard_app 1000 5000
+g++ -std=c++17 -Wall -Wextra -Wpedantic -I. src/structA/avl.cpp src/structB/fenwick.cpp app/player_hash.cpp app/leaderboard.cpp app/main.cpp -o scratch/scratch-c/leaderboard_app
+./scratch/scratch-c/leaderboard_app 1000 5000
 ```
 
-Existing differential tester:
+After Member 4's oracle module arrives, run its differential tester:
 
 ```bash
-g++ -std=c++17 -Wall -Wextra -Wpedantic -I. src/structA/avl.cpp src/structB/fenwick.cpp app/player_hash.cpp app/leaderboard.cpp oracle/reference.cpp oracle/differential.cpp -o scratch/differential
-./scratch/differential 10000 1000 253
+g++ -std=c++17 -Wall -Wextra -Wpedantic -I. src/structA/avl.cpp src/structB/fenwick.cpp app/player_hash.cpp app/leaderboard.cpp oracle/reference.cpp oracle/differential.cpp -o scratch/scratch-b/differential
+./scratch/scratch-b/differential 10000 1000 253
 ```
 
-Final-code checks were run by Codex on 14 November 2026 and passed. See `scratch/member2-test-results.txt`. These are correctness checks, not timing benchmarks.
+Final-code checks were run by Codex on 14 November 2026 and passed. See `scratch/scratch-b/member2-test-results.txt`. These are correctness checks, not timing benchmarks.
 
 ## Submit through the team's existing GitHub repository
 
@@ -57,13 +57,13 @@ Compare and copy only your owned files from this folder into the clone. Keep oth
 - `src/structB/fenwick.hpp` and `fenwick.cpp`
 - `docs/derivations/D2.md` and `D2.pdf`
 - `members/02-structure-b/README.md`, `viva.md`, `PR.md`
-- `scratch/mine.cpp`, `scratch/fenwick_random.cpp`, `scratch/member2-test-results.txt`, `scratch/export_d2.py`
+- `scratch/scratch-b/mine.cpp`, `scratch/scratch-b/fenwick_random.cpp`, `scratch/scratch-b/member2-test-results.txt`, `scratch/scratch-b/export_d2.py`
 - The merged `TOOLS.md`
 
 Run the commands above inside the clone. Then stage the explicit files:
 
 ```bash
-git add src/structB/fenwick.hpp src/structB/fenwick.cpp docs/derivations/D2.md docs/derivations/D2.pdf members/02-structure-b/README.md members/02-structure-b/viva.md members/02-structure-b/PR.md scratch/mine.cpp scratch/fenwick_random.cpp scratch/member2-test-results.txt scratch/export_d2.py TOOLS.md
+git add src/structB/fenwick.hpp src/structB/fenwick.cpp docs/derivations/D2.md docs/derivations/D2.pdf members/02-structure-b/README.md members/02-structure-b/viva.md members/02-structure-b/PR.md scratch/scratch-b/mine.cpp scratch/scratch-b/fenwick_random.cpp scratch/scratch-b/member2-test-results.txt scratch/scratch-b/export_d2.py TOOLS.md
 git diff --cached --stat
 git diff --cached
 git commit -m "Complete Fenwick module, D2 proof and validation"
@@ -79,7 +79,7 @@ Use a temporary environment to avoid changing system Python packages:
 ```bash
 python3 -m venv /private/tmp/teerth-d2-export
 /private/tmp/teerth-d2-export/bin/pip install reportlab pymupdf
-/private/tmp/teerth-d2-export/bin/python scratch/export_d2.py
+/private/tmp/teerth-d2-export/bin/python scratch/scratch-b/export_d2.py
 ```
 
 This replaces `docs/derivations/D2.pdf` from `D2.md` and renders previews in `/private/tmp/teerth-d2-preview/`. Review all pages after changing the Markdown.

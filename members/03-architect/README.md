@@ -6,22 +6,22 @@ Review the interface with the other five members before merging structure code. 
 
 ## Current check
 
-The current repo has Member 2's Fenwick module but not Member 1's `src/structA/avl.hpp` and `.cpp`. The application expects the AVL API described in `INTERFACE.md`. The standalone hash test works now:
+The current repo has both Member 1's AVL and Member 2's Fenwick modules. Run the standalone hash test:
 
 ```powershell
-g++ -std=c++17 -Wall -Wextra -Wpedantic -I. app/player_hash.cpp scratch/player_hash_test.cpp -o scratch/player_hash_test.exe
-./scratch/player_hash_test.exe
+g++ -std=c++17 -Wall -Wextra -Wpedantic -I. app/player_hash.cpp scratch/scratch-c/player_hash_test.cpp -o scratch/scratch-c/player_hash_test.exe
+./scratch/scratch-c/player_hash_test.exe
 ```
 
 The test compares 100,000 deterministic insert, update, delete, lookup, and resize operations against a standard-library map used only as an oracle. A successful run exits zero.
 
-After Member 1's AVL module arrives, compile and run the integrated application:
+Compile and run the integrated application and its targeted tests:
 
 ```powershell
-g++ -std=c++17 -O2 -Wall -Wextra -Wpedantic -I. src/structA/avl.cpp src/structB/fenwick.cpp app/player_hash.cpp app/leaderboard.cpp app/main.cpp -o scratch/leaderboard_app.exe
-./scratch/leaderboard_app.exe 1000 5000
-g++ -std=c++17 -Wall -Wextra -Wpedantic -I. src/structA/avl.cpp src/structB/fenwick.cpp app/player_hash.cpp app/leaderboard.cpp scratch/leaderboard_test.cpp -o scratch/leaderboard_test.exe
-./scratch/leaderboard_test.exe
+g++ -std=c++17 -O2 -Wall -Wextra -Wpedantic -I. src/structA/avl.cpp src/structB/fenwick.cpp app/player_hash.cpp app/leaderboard.cpp app/main.cpp -o scratch/scratch-c/leaderboard_app.exe
+./scratch/scratch-c/leaderboard_app.exe 1000 5000
+g++ -std=c++17 -Wall -Wextra -Wpedantic -I. src/structA/avl.cpp src/structB/fenwick.cpp app/player_hash.cpp app/leaderboard.cpp scratch/scratch-c/leaderboard_test.cpp -o scratch/scratch-c/leaderboard_test.exe
+./scratch/scratch-c/leaderboard_test.exe
 ```
 
-For the target replay, run `./scratch/leaderboard_app.exe 1000000 1000000` on a machine with sufficient memory. Keep Member 2's files and documentation when integrating other roles.
+For the target replay, run `./scratch/scratch-c/leaderboard_app.exe 1000000 1000000` on a machine with sufficient memory. Keep teammates' files and documentation when integrating other roles.
