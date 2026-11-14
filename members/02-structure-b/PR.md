@@ -4,6 +4,8 @@ Complete compressed-score Fenwick module and D2 proof
 
 # Suggested PR body
 
+Author: Teerth (250001027), Member 2 - Structure B.
+
 The Fenwick implementation now matches its header and integrates with the leaderboard after practice code had accidentally replaced the class implementation. It supports updates over a fixed score universe, competition rank, binary-lifting score selection, auditing and rebuilding. Names and loops were adapted to the owner's familiar style while retaining the class interface used by the application.
 
 Adds D2 with a loop-invariant proof, zero-count worked example and fixed-universe explanation, plus a standalone sorted-array tester and viva notes. TOOLS.md records AI assistance and the distinction between owner review and Codex-run validation.

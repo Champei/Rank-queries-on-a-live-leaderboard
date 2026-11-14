@@ -1,3 +1,4 @@
+// Author: Teerth (250001027) - Structure B
 #include "src/structB/fenwick.hpp"
 #include <algorithm>
 #include <stdexcept>

@@ -1,6 +1,6 @@
 # Tools used
 
-## Member 2: Teerth - Structure B (14 November 2026)
+## Member 2: Teerth (250001027) - Structure B (14 November 2026)
 
 - OpenAI Codex assisted with reviewing and explaining `src/structB/fenwick.hpp` and `fenwick.cpp`, reconstructing the class implementation after practice code was accidentally pasted over it, and adapting names, aliases and loops at Teerth's request. The class, namespace and exception interface remain for integration. This was an assisted reconstruction, not a verified byte-for-byte restoration of the original file.
 - Teerth reports rewriting the Fenwick operations in competitive-programming style in `scratch/mine.cpp` and working through coordinate compression, update/prefix jumps, competition rank, and binary-lifting selection with counts `[2,0,1,3,0]`. Codex supplied explanations and follow-up questions. This note does not certify viva readiness or claim independent authorship of the generated class implementation.
@@ -8,3 +8,5 @@
 - Final-code checks were executed by Codex using `/usr/bin/g++`, which reports Apple clang 17.0.0, target `arm64-apple-darwin24.6.0`, with C++17. The integrated application passed a run with 1,000 players and 5,000 revisions, ending with `merged: 1000 players`. The existing differential test printed `PASS 10000 operations, seed 253` with 1,000 possible IDs.
 - The new sorted-array tester passed 300 random universes x 400 updates = 120,000 updates, seed 253. After each update it checks both the practice functions and integrated class for rank, every valid select position, size and audit. It also checks empty-universe behavior, rebuild, invalid positions, an unseen-score update and removal from a zero-count coordinate. The practice worked example printed the expected bit, rank, select and audit values. Output is saved in `scratch/member2-test-results.txt`; commands are in the member README.
 - No benchmark measurements or performance conclusions were produced for this contribution. Tests provide evidence for the exercised cases, not a proof of correctness. GitHub branch/PR completion must be recorded after it actually happens.
+
+- Codex added Teerth's roll number (250001027) to the Structure B author details and regenerated D2.pdf at his request. No algorithm changes were made.

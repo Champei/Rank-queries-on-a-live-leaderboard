@@ -1,4 +1,4 @@
-# Member 2: Teerth - Structure B
+# Member 2: Teerth (250001027) - Structure B
 
 Own `src/structB/fenwick.hpp`, `src/structB/fenwick.cpp` and `docs/derivations/D2.md`/`D2.pdf`. The Fenwick stores counts over a fixed, compressed score universe. It returns competition ranks and selected scores; the AVL resolves player IDs and their tie order.
 

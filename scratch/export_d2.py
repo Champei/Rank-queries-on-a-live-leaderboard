@@ -77,12 +77,12 @@ while i < len(lines):
 def footer(canvas, doc):
     canvas.setFont('Helvetica',8)
     canvas.setFillColor(colors.HexColor('#536174'))
-    canvas.drawString(56,29,'Teerth | Structure B | D2')
+    canvas.drawString(56,29,'Teerth (250001027) | Structure B | D2')
     canvas.drawRightString(A4[0]-56,29,str(doc.page))
 
 SimpleDocTemplate(str(output), pagesize=A4, rightMargin=56, leftMargin=56,
                  topMargin=45, bottomMargin=48, title='D2: Correctness of Fenwick binary lifting',
-                 author='Teerth').build(story,onFirstPage=footer,onLaterPages=footer)
+                 author='Teerth (250001027)').build(story,onFirstPage=footer,onLaterPages=footer)
 print(output)
 
 import pymupdf

@@ -1,3 +1,4 @@
+// Author: Teerth (250001027) - Structure B
 #pragma once
 #include <cstddef>
 #include <cstdint>
