@@ -1,0 +1,14 @@
+Apple clang version 17.0.0 (clang-1700.0.13.5)
+Target: arm64-apple-darwin24.6.0
+Thread model: posix
+InstalledDir: /Library/Developer/CommandLineTools/usr/bin
+revision 0: player 286 competition rank 235, sampled 943 score 8403
+positions 40..50 (id:score): 940:9730 364:9728 917:9725 9:9716 554:9692 971:9686 556:9679 871:9668 798:9639 965:9636 421:9619
+season split >5000: 498, <=5000: 502
+merged: 1000 players
+PASS 10000 operations, seed 253
+PASS 120000 random updates (300 universes x 400), seed 253; edge cases passed
+bit: 2 2 1 6 0 
+ranks 40,30,10,20: 1 4 5 5 
+select 1..6: 40 40 40 30 10 10 
+audit: 1
