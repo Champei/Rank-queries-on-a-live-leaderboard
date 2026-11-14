@@ -1,0 +1,216 @@
+%PDF-1.4
+%‚„œ”
+1 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+2 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >>
+endobj
+3 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Courier >>
+endobj
+4 0 obj
+<< /Length 4675 >>
+stream
+0.10 0.16 0.25 rg
+BT /F2 9 Tf 48 808 Td (STRUCTURE A  /  D1 DERIVATION) Tj ET
+0.16 0.43 0.55 rg
+48 798 m 547 798 l S
+0.08 0.25 0.40 rg
+BT /F2 21 Tf 48 770.0 Td (D1: Ordered join in an order statistic AVL tree) Tj ET
+0.16 0.43 0.55 rg
+BT /F2 10 Tf 48 726.1 Td (Author: Chaitanya Sharma  |  Order: score descending, player ID ascending) Tj ET
+0.16 0.20 0.27 rg
+BT /F1 9.5 Tf 48 710.9 Td (Structure: AVL tree ordered by score descending, then player ID ascending) Tj ET
+0.08 0.25 0.40 rg
+BT /F2 14 Tf 48 686.4 Td (Goal and precondition) Tj ET
+0.16 0.20 0.27 rg
+BT /F1 9.5 Tf 48 658.2 Td (Combine two AVL trees L and R around a pivot entry p. The operation is valid only if every) Tj ET
+0.16 0.20 0.27 rg
+BT /F1 9.5 Tf 48 643.7 Td (key in L precedes p and p precedes every key in R. This strict boundary condition is what) Tj ET
+0.16 0.20 0.27 rg
+BT /F1 9.5 Tf 48 629.3 Td (makes the result a binary search tree. The implementation checks the maximum key of L and) Tj ET
+0.16 0.20 0.27 rg
+BT /F1 9.5 Tf 48 614.8 Td (minimum key of R before transferring ownership.) Tj ET
+0.08 0.25 0.40 rg
+BT /F2 14 Tf 48 590.4 Td (Height cases) Tj ET
+0.16 0.20 0.27 rg
+BT /F1 9.5 Tf 48 562.1 Td (If the heights are close, the pivot can be the root immediately:) Tj ET
+0.22 0.32 0.42 rg
+BT /F3 8 Tf 48 543.7 Td (Compatible heights: height\(L\), height\(R\) differ by at most one) Tj ET
+0.22 0.32 0.42 rg
+BT /F3 8 Tf 48 531.5 Td (        p) Tj ET
+0.22 0.32 0.42 rg
+BT /F3 8 Tf 48 519.4 Td (       / \\) Tj ET
+0.22 0.32 0.42 rg
+BT /F3 8 Tf 48 507.2 Td (      L   R) Tj ET
+0.16 0.20 0.27 rg
+BT /F1 9.5 Tf 48 491.0 Td (For a much taller left tree, descend its right spine until a subtree can be joined with the) Tj ET
+0.16 0.20 0.27 rg
+BT /F1 9.5 Tf 48 476.6 Td (pivot and the right tree:) Tj ET
+0.22 0.32 0.42 rg
+BT /F3 8 Tf 48 458.2 Td (Tall-left case: follow the right spine) Tj ET
+0.22 0.32 0.42 rg
+BT /F3 8 Tf 48 446.0 Td (    L) Tj ET
+0.22 0.32 0.42 rg
+BT /F3 8 Tf 48 433.8 Td (     \\) Tj ET
+0.22 0.32 0.42 rg
+BT /F3 8 Tf 48 421.7 Td (      B) Tj ET
+0.22 0.32 0.42 rg
+BT /F3 8 Tf 48 409.5 Td (       \\) Tj ET
+0.22 0.32 0.42 rg
+BT /F3 8 Tf 48 397.4 Td (        X  <- join\(X, p, R\)) Tj ET
+0.16 0.20 0.27 rg
+BT /F1 9.5 Tf 48 381.2 Td (The mirrored case follows the taller right tree's left spine. After joining at the) Tj ET
+0.16 0.20 0.27 rg
+BT /F1 9.5 Tf 48 366.8 Td (boundary, repair balance on the path back to the root. Each ancestor keeps its other) Tj ET
+0.16 0.20 0.27 rg
+BT /F1 9.5 Tf 48 352.3 Td (subtree unchanged.) Tj ET
+0.22 0.32 0.42 rg
+BT /F3 8 Tf 48 333.9 Td (Local repair: one right rotation) Tj ET
+0.22 0.32 0.42 rg
+BT /F3 8 Tf 48 321.7 Td (      z                 y) Tj ET
+0.22 0.32 0.42 rg
+BT /F3 8 Tf 48 309.6 Td (     / \\               / \\) Tj ET
+0.22 0.32 0.42 rg
+BT /F3 8 Tf 48 297.4 Td (    y   C     ->      A   z) Tj ET
+0.22 0.32 0.42 rg
+BT /F3 8 Tf 48 285.2 Td (   / \\                   / \\) Tj ET
+0.22 0.32 0.42 rg
+BT /F3 8 Tf 48 273.1 Td (  A   B                 B   C) Tj ET
+0.16 0.20 0.27 rg
+BT /F1 9.5 Tf 48 256.9 Td (If y leans right, a left-then-right double rotation is needed. The symmetric pair handles) Tj ET
+0.16 0.20 0.27 rg
+BT /F1 9.5 Tf 48 242.5 Td (right-heavy ancestors.) Tj ET
+0.08 0.25 0.40 rg
+BT /F2 14 Tf 48 218.0 Td (Correctness argument) Tj ET
+0.16 0.20 0.27 rg
+BT /F1 9.5 Tf 48 189.8 Td (Ordering. In the compatible-height case, the input precondition places every key of L below) Tj ET
+0.16 0.20 0.27 rg
+BT /F1 9.5 Tf 48 175.3 Td (p in the tree order and every key of R above p. In the tall-left case, all keys in the) Tj ET
+0.16 0.20 0.27 rg
+BT /F1 9.5 Tf 48 160.9 Td (untouched left subtrees remain before p; the recursively joined subtree contains the suffix) Tj ET
+0.16 0.20 0.27 rg
+BT /F1 9.5 Tf 48 146.4 Td (of L and p followed by R, preserving the same order. The symmetric argument applies to a) Tj ET
+0.16 0.20 0.27 rg
+BT /F1 9.5 Tf 48 132.0 Td (tall-right tree. Rotations preserve in-order traversal, so they preserve this ordering.) Tj ET
+0.16 0.20 0.27 rg
+BT /F1 9.5 Tf 48 113.6 Td (AVL balance. When subtree heights differ by at most one, the new pivot has a balance factor) Tj ET
+0.16 0.20 0.27 rg
+BT /F1 9.5 Tf 48 99.1 Td (in [-1,1]. Otherwise, recursion descends one level along the taller tree's inner spine. At) Tj ET
+0.16 0.20 0.27 rg
+BT /F1 9.5 Tf 48 84.7 Td (the stopping point, it creates a locally balanced pivot node. Each ancestor changes only) Tj ET
+0.16 0.20 0.27 rg
+BT /F1 9.5 Tf 48 70.2 Td (through its inner child; a single or double AVL rotation restores a balance factor in) Tj ET
+0.35 0.40 0.47 rg
+BT /F1 8 Tf 48 28 Td (Chaitanya Sharma  |  Order Statistic AVL) Tj ET
+BT /F1 8 Tf 520 28 Td (1 / 2) Tj ET
+endstream
+endobj
+5 0 obj
+<< /Length 4356 >>
+stream
+0.10 0.16 0.25 rg
+BT /F2 9 Tf 48 808 Td (STRUCTURE A  /  D1 DERIVATION) Tj ET
+0.16 0.43 0.55 rg
+48 798 m 547 798 l S
+0.16 0.20 0.27 rg
+BT /F1 9.5 Tf 48 770.0 Td ([-1,1]. The recursive routine returns a valid AVL subtree, so this repair proceeds) Tj ET
+0.16 0.20 0.27 rg
+BT /F1 9.5 Tf 48 755.6 Td (inductively to the root.) Tj ET
+0.16 0.20 0.27 rg
+BT /F1 9.5 Tf 48 737.1 Td (For a left-heavy ancestor, a left-heavy \(or level\) left child is repaired with one right) Tj ET
+0.16 0.20 0.27 rg
+BT /F1 9.5 Tf 48 722.7 Td (rotation. If the left child leans right, first rotate that child left, then rotate the) Tj ET
+0.16 0.20 0.27 rg
+BT /F1 9.5 Tf 48 708.2 Td (ancestor right; the middle subtree becomes the pivot between the two outer subtrees. The) Tj ET
+0.16 0.20 0.27 rg
+BT /F1 9.5 Tf 48 693.8 Td (right-heavy cases mirror these steps. Rotations preserve the in-order sequence while moving) Tj ET
+0.16 0.20 0.27 rg
+BT /F1 9.5 Tf 48 679.4 Td (the taller side's root toward the center; the two resulting child heights differ by at most) Tj ET
+0.16 0.20 0.27 rg
+BT /F1 9.5 Tf 48 664.9 Td (one. This is why balance is restored without changing key order.) Tj ET
+0.16 0.20 0.27 rg
+BT /F1 9.5 Tf 48 646.5 Td (Metadata. fix\(node\) computes height = 1 + max\(height\(left\), height\(right\)\) and count = 1 +) Tj ET
+0.16 0.20 0.27 rg
+BT /F1 9.5 Tf 48 632.0 Td (count\(left\) + count\(right\). It runs after child links are set and after each rotation,) Tj ET
+0.16 0.20 0.27 rg
+BT /F1 9.5 Tf 48 617.6 Td (bottom-up. Therefore every returned node has correct height and subtree size. These sizes) Tj ET
+0.16 0.20 0.27 rg
+BT /F1 9.5 Tf 48 603.2 Td (support logarithmic selection and rank queries.) Tj ET
+0.16 0.20 0.27 rg
+BT /F1 9.5 Tf 48 584.7 Td (Ownership. The public join takes rvalue references. After validating the boundary, it) Tj ET
+0.16 0.20 0.27 rg
+BT /F1 9.5 Tf 48 570.3 Td (exchanges each input root with null; the result becomes the sole owner of all transferred) Tj ET
+0.16 0.20 0.27 rg
+BT /F1 9.5 Tf 48 555.8 Td (nodes and the newly allocated pivot node. Recursive join_nodes rearranges links among those) Tj ET
+0.16 0.20 0.27 rg
+BT /F1 9.5 Tf 48 541.4 Td (nodes without copying or sharing nodes. Destruction of the moved-from inputs is safe) Tj ET
+0.16 0.20 0.27 rg
+BT /F1 9.5 Tf 48 527.0 Td (because their roots are null. If precondition validation fails, it happens before either) Tj ET
+0.16 0.20 0.27 rg
+BT /F1 9.5 Tf 48 512.5 Td (root is exchanged, leaving both trees intact.) Tj ET
+0.08 0.25 0.40 rg
+BT /F2 14 Tf 48 488.1 Td (Complexity) Tj ET
+0.16 0.20 0.27 rg
+BT /F1 9.5 Tf 48 459.8 Td (Assume hL >= hR. The internal join follows the right spine of L until the current subtree) Tj ET
+0.16 0.20 0.27 rg
+BT /F1 9.5 Tf 48 445.4 Td (height is at most hR + 1. Each recursive step moves down one level, and the amount of) Tj ET
+0.16 0.20 0.27 rg
+BT /F1 9.5 Tf 48 430.9 Td (descent is at most hL - hR + 1; the symmetric case is identical. Every visited level) Tj ET
+0.16 0.20 0.27 rg
+BT /F1 9.5 Tf 48 416.5 Td (performs constant-time metadata repair and at most two rotations. Internal join_nodes) Tj ET
+0.16 0.20 0.27 rg
+BT /F1 9.5 Tf 48 402.0 Td (therefore takes O\(|hL-hR|+1\) time. The public join first searches one boundary spine in) Tj ET
+0.16 0.20 0.27 rg
+BT /F1 9.5 Tf 48 387.6 Td (each input tree to validate ordering, which costs O\(hL+hR\). Its overall time is O\(log n\)) Tj ET
+0.16 0.20 0.27 rg
+BT /F1 9.5 Tf 48 373.2 Td (for AVL inputs.) Tj ET
+0.16 0.20 0.27 rg
+BT /F1 9.5 Tf 48 354.7 Td (For a range query that returns k players, the implementation must append and materialize k) Tj ET
+0.16 0.20 0.27 rg
+BT /F1 9.5 Tf 48 340.3 Td (entries in its output vector. That requires at least O\(k\) time regardless of tree balance;) Tj ET
+0.16 0.20 0.27 rg
+BT /F1 9.5 Tf 48 325.8 Td (the pruned traversal adds only the search paths around the range.) Tj ET
+0.08 0.25 0.40 rg
+BT /F2 14 Tf 48 301.4 Td (Verification) Tj ET
+0.16 0.20 0.27 rg
+BT /F1 9.5 Tf 48 269.1 Td (g++ -std=c++17 -O2 -Wall -Wextra -pedantic -I. src/structA/avl.cpp adversary/check.cpp -o) Tj ET
+0.16 0.20 0.27 rg
+BT /F1 9.5 Tf 48 254.7 Td (build/adversarial.exe) Tj ET
+0.16 0.20 0.27 rg
+BT /F1 9.5 Tf 48 240.2 Td (./build/adversarial.exe 10000) Tj ET
+0.35 0.40 0.47 rg
+BT /F1 8 Tf 48 28 Td (Chaitanya Sharma  |  Order Statistic AVL) Tj ET
+BT /F1 8 Tf 520 28 Td (2 / 2) Tj ET
+endstream
+endobj
+6 0 obj
+<< /Type /Page /Parent 8 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 1 0 R /F2 2 0 R /F3 3 0 R >> >> /Contents 4 0 R >>
+endobj
+7 0 obj
+<< /Type /Page /Parent 8 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 1 0 R /F2 2 0 R /F3 3 0 R >> >> /Contents 5 0 R >>
+endobj
+8 0 obj
+<< /Type /Pages /Kids [6 0 R 7 0 R] /Count 2 >>
+endobj
+9 0 obj
+<< /Type /Catalog /Pages 8 0 R >>
+endobj
+xref
+0 10
+0000000000 65535 f 
+0000000015 00000 n 
+0000000085 00000 n 
+0000000160 00000 n 
+0000000228 00000 n 
+0000004955 00000 n 
+0000009363 00000 n 
+0000009509 00000 n 
+0000009655 00000 n 
+0000009718 00000 n 
+trailer
+<< /Size 10 /Root 9 0 R >>
+startxref
+9767
+%%EOF
