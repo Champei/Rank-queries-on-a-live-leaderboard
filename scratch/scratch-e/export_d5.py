@@ -68,7 +68,9 @@ def github_lists_to_python_markdown(text):
         if stripped and indent:
             line = " " * (2 * indent) + stripped
         starts_list = stripped.startswith("- ") and indent == 0
-        prev_is_text = prev.strip() and not prev.startswith((" ", "- "))
+        # Any non-list line before a top-level item, including an indented paragraph
+        # that continues the previous item, would otherwise swallow the new item.
+        prev_is_text = prev.strip() and not prev.lstrip(" ").startswith("- ")
         if starts_list and prev_is_text:
             out.append("")
         out.append(line); prev = line

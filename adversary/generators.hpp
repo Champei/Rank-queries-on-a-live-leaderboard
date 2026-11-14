@@ -11,6 +11,8 @@ std::vector<Entry> rotation_inserts(std::size_t n);
 std::vector<Entry> rotation_deletes(std::size_t n);
 // Starter order (always delete the current last key), kept for comparison.
 std::vector<Entry> rotation_deletes_one_end(std::size_t n);
+// Same shape as rotation_inserts, but all scores tie, so only the ID tie-break orders keys.
+std::vector<Entry> tied_inserts(std::size_t n);
 std::pair<std::vector<Entry>, std::vector<Entry>> unequal_join(std::size_t n);
 // Keys for an ordered join with chosen sizes: every left key precedes the pivot,
 // and the pivot precedes every right key. Either side may be empty.

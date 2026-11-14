@@ -16,15 +16,33 @@ static Entry at_position(std::size_t n, std::size_t p) {
 }
 std::vector<Entry> rotation_deletes(std::size_t n) {
     // Found by a greedy search that tried every possible next delete (see
-    // scratch/scratch-e). Delete the n % 4 first keys, then walk the rest in blocks
-    // of four positions b..b+3 from the left end, deleting the third, first, second
-    // and fourth key of each block. Measured: at least n - bitlen(n) - 1 rotations for
-    // every n up to 3000, about one per delete; deleting from one end gives about 0.5.
+    // scratch/scratch-e). Opening, by n % 4:
+    //   0: nothing;  2: positions 0, 1;  3: positions 0, 1, 2;
+    //   1: positions 3, 0, 1, 2, 4 (a block of five; for n = 1, just position 0).
+    // Then the remaining positions in blocks of four b..b+3 from the left end,
+    // deleting the third, first, second and fourth key of each block.
+    // Measured: equals the greedy search for every n up to 200, and at least
+    // n - bitlen(n) - 1 rotations for every n up to 3000, about one per delete.
+    // Deleting from one end gives about 0.5.
     std::vector<Entry> out; out.reserve(n);
-    std::size_t lead = n % 4;
-    for (std::size_t p = 0; p < lead; ++p) out.push_back(at_position(n, p));
-    for (std::size_t b = lead; b + 3 < n; b += 4)
-        for (std::size_t offset : {2, 0, 1, 3}) out.push_back(at_position(n, b + offset));
+    std::size_t start = 0;
+    if (n % 4 == 1 && n >= 5) {
+        for (std::size_t p : {3u, 0u, 1u, 2u, 4u}) out.push_back(at_position(n, p));
+        start = 5;
+    } else {
+        start = n % 4;
+        for (std::size_t p = 0; p < start; ++p) out.push_back(at_position(n, p));
+    }
+    for (std::size_t b = start; b + 3 < n; b += 4)
+        for (std::size_t offset : {2u, 0u, 1u, 3u}) out.push_back(at_position(n, b + offset));
+    return out;
+}
+std::vector<Entry> tied_inserts(std::size_t n) {
+    // Every key has score 0, so the order comes from the ID tie-break alone. IDs
+    // fall, so each new key is the new first key, as in rotation_inserts.
+    std::vector<Entry> out; out.reserve(n);
+    for (std::size_t i = 0; i < n; ++i)
+        out.push_back({0, static_cast<std::int64_t>(n - 1 - i)});
     return out;
 }
 std::vector<Entry> rotation_deletes_one_end(std::size_t n) {

@@ -1,12 +1,13 @@
 // Member 5 (Adversary): how the rotation_deletes family was found and checked.
 //
 // 1. Mirror: a copy of avl.cpp's insert/erase/balance on plain int keys, stored in
-//    arrays so a whole tree can be copied. It is checked against the real Avl's
-//    rotation counter first.
+//    arrays so a whole tree can be copied. It is checked against the real Avl after
+//    every operation of 200 random insert/delete sequences.
 // 2. Greedy search: starting from the rotation_inserts(n) tree, try every possible
 //    next delete on a copy and keep the one with the most rotations.
 // 3. Fixed families, run on the real Avl: the greedy picks follow a pattern, which
-//    became adversary::rotation_deletes. It is checked for every n up to 3000.
+//    became adversary::rotation_deletes. It is compared with greedy for every n up to
+//    200 and with n - bitlen(n) for every n up to 3000.
 //
 // Build from the repository root:
 //   g++ -std=c++17 -O2 -I. src/structA/avl.cpp adversary/generators.cpp scratch/scratch-e/delete_search.cpp -o build/delete_search.exe
@@ -87,14 +88,24 @@ static void validate_mirror() {
         for (int i = 0; i < n; ++i) keys[i] = i;
         std::shuffle(keys.begin(), keys.end(), rng);
         Avl real; Mirror m;
-        for (int k : keys) { real.insert({-static_cast<std::int64_t>(k), k}); m.insert(k); }
+        // After every operation: same running rotation count and same keys in order.
+        // (Avl does not expose its shape; matching the count after each single operation
+        // means every insert and erase rotated exactly as often in both.)
+        auto agree = [&]() {
+            std::vector<int> mirror_keys; m.inorder(m.root, mirror_keys);
+            auto real_keys = real.entries();
+            bool ok = static_cast<long long>(real.rotations()) == m.rot &&
+                      mirror_keys.size() == real_keys.size();
+            for (std::size_t i = 0; ok && i < real_keys.size(); ++i)
+                ok = real_keys[i].player_id == mirror_keys[i];
+            if (!ok) { std::puts("FAIL mirror and Avl differ after an operation"); std::exit(1); }
+        };
+        for (int k : keys) { real.insert({-static_cast<std::int64_t>(k), k}); m.insert(k); agree(); }
         std::shuffle(keys.begin(), keys.end(), rng);
-        for (int k : keys) { real.erase({-static_cast<std::int64_t>(k), k}); m.erase(k); }
-        if (static_cast<long long>(real.rotations()) != m.rot) {
-            std::puts("FAIL mirror and Avl rotation counts differ"); std::exit(1);
-        }
+        for (int k : keys) { real.erase({-static_cast<std::int64_t>(k), k}); m.erase(k); agree(); }
     }
-    std::puts("mirror matches the real Avl rotation count on 200 random insert/delete sequences");
+    std::puts("mirror matches the real Avl (rotation count and key order after every operation)"
+              " on 200 random insert/delete sequences");
 }
 
 // Greedy: before each delete, try every live key on a copy and keep the one with the
@@ -134,23 +145,32 @@ static int bit_length(long long n) { int b = 0; while (n) { ++b; n >>= 1; } retu
 int main() {
     validate_mirror();
 
-    std::puts("\nGreedy picks, as the rank among live keys (0 = first live key):");
-    for (int n : {12, 20, 40}) {
+    std::puts("\nGreedy picks, as the rank among live keys (0 = first live key), one size per n % 4:");
+    for (int n : {20, 21, 22, 23}) {
         std::vector<int> ranks;
         long long total = greedy(n, &ranks);
-        std::printf("  n=%-3d %lld rotations, picks:", n, total);
+        std::printf("  n=%-3d (n%%4=%d) %lld rotations, picks:", n, n % 4, total);
         for (int r : ranks) std::printf(" %d", r);
         std::printf("\n");
     }
 
-    std::puts("\nGreedy versus the fixed families (rotations per delete):");
-    std::printf("  %6s %8s %10s %10s %10s\n", "n", "greedy", "blocks", "one end", "n-bitlen");
+    // Greedy runs on the mirror; the other columns run on the real Avl.
+    std::puts("\nTotal delete rotations: greedy (on the mirror) versus the fixed families (real Avl):");
+    std::printf("  %6s %8s %18s %10s %10s\n", "n", "greedy", "rotation_deletes", "one end", "n-bitlen");
     for (int n : {63, 100, 127, 200, 255, 500}) {
         long long g = greedy(n, nullptr);
         long long b = delete_rotations(n, adversary::rotation_deletes(n));
         long long e = delete_rotations(n, adversary::rotation_deletes_one_end(n));
-        std::printf("  %6d %8lld %10lld %10lld %10d\n", n, g, b, e, n - bit_length(n));
+        std::printf("  %6d %8lld %18lld %10lld %10d\n", n, g, b, e, n - bit_length(n));
     }
+    int same_as_greedy = 0, greedy_better = 0, family_better = 0;
+    for (int n = 1; n <= 200; ++n) {
+        long long g = greedy(n, nullptr);
+        long long b = delete_rotations(static_cast<std::size_t>(n), adversary::rotation_deletes(static_cast<std::size_t>(n)));
+        if (b == g) ++same_as_greedy; else if (g > b) ++greedy_better; else ++family_better;
+    }
+    std::printf("\nrotation_deletes versus greedy, every n = 1..200: equal %d, greedy better %d,"
+                " rotation_deletes better %d\n", same_as_greedy, greedy_better, family_better);
 
     // Every size up to 3000 on the real Avl.
     int at_least = 0, one_less = 0, worse = 0;
@@ -164,10 +184,15 @@ int main() {
 
     std::puts("\nLarge sizes (real Avl, no per-step audit):");
     for (std::size_t n : {10000u, 100000u, 1000000u}) {
+        Avl built;
+        for (auto e : adversary::rotation_inserts(n)) built.insert(e);
+        auto inserts = static_cast<long long>(built.rotations());
         long long b = delete_rotations(n, adversary::rotation_deletes(n));
         long long e = delete_rotations(n, adversary::rotation_deletes_one_end(n));
-        std::printf("  n=%-8zu blocks %8lld (%.4f per delete)   one end %8lld (%.4f)\n",
-                    n, b, static_cast<double>(b) / n, e, static_cast<double>(e) / n);
+        std::printf("  n=%-8zu inserts %8lld (n-bitlen %lld)   blocks %8lld (%.4f per delete)"
+                    "   one end %8lld (%.4f)\n", n, inserts,
+                    static_cast<long long>(n) - bit_length(static_cast<long long>(n)),
+                    b, static_cast<double>(b) / n, e, static_cast<double>(e) / n);
     }
     return worse == 0 ? 0 : 1;
 }
