@@ -1,47 +1,92 @@
 Member 5 (Adversary) test results
-Machine: Windows 11, g++.exe (MinGW-W64 x86_64-ucrt-posix-seh, built by Brecht Sanders, r2) 16.2.0, flags -std=c++17 -O2 -Wall -Wextra -Wpedantic
-Date: 2026-11-14. Code: branch member5-adversary on top of main c58fbb0.
+Machine: Windows 11, g++.exe (MinGW-W64 x86_64-ucrt-posix-seh, built by Brecht Sanders, r2) 16.2.0
+Date: 2026-11-15. Code: branch member5-adversary on top of main 89b26e0.
 
-== ./build/adversarial.exe 1 2 3 4 5 7 8 15 16 100 500 1000 1023 1024 10000
-PASS join rejects overlapping keys and leaves its inputs intact
-PASS n=1  insert rotations 0 (0.0000 per insert, predicted 0: match)  delete rotations 0 (0.0000 per delete; one-end order 0, 0.0000)  joins 10 shapes
-PASS n=2  insert rotations 0 (0.0000 per insert, predicted 0: match)  delete rotations 0 (0.0000 per delete; one-end order 0, 0.0000)  joins 10 shapes
-PASS n=3  insert rotations 1 (0.3333 per insert, predicted 1: match)  delete rotations 0 (0.0000 per delete; one-end order 0, 0.0000)  joins 10 shapes
-PASS n=4  insert rotations 1 (0.2500 per insert, predicted 1: match)  delete rotations 1 (0.2500 per delete; one-end order 1, 0.2500)  joins 10 shapes
-PASS n=5  insert rotations 2 (0.4000 per insert, predicted 2: match)  delete rotations 2 (0.4000 per delete; one-end order 1, 0.2000)  joins 10 shapes
-PASS n=7  insert rotations 4 (0.5714 per insert, predicted 4: match)  delete rotations 3 (0.4286 per delete; one-end order 1, 0.1429)  joins 10 shapes
-PASS n=8  insert rotations 4 (0.5000 per insert, predicted 4: match)  delete rotations 4 (0.5000 per delete; one-end order 2, 0.2500)  joins 10 shapes
-PASS n=15  insert rotations 11 (0.7333 per insert, predicted 11: match)  delete rotations 10 (0.6667 per delete; one-end order 4, 0.2667)  joins 10 shapes
-PASS n=16  insert rotations 11 (0.6875 per insert, predicted 11: match)  delete rotations 11 (0.6875 per delete; one-end order 5, 0.3125)  joins 10 shapes
-PASS n=100  insert rotations 93 (0.9300 per insert, predicted 93: match)  delete rotations 93 (0.9300 per delete; one-end order 44, 0.4400)  joins 10 shapes
-PASS n=500  insert rotations 491 (0.9820 per insert, predicted 491: match)  delete rotations 491 (0.9820 per delete; one-end order 242, 0.4840)  joins 10 shapes
-PASS n=1000  insert rotations 990 (0.9900 per insert, predicted 990: match)  delete rotations 990 (0.9900 per delete; one-end order 491, 0.4910)  joins 10 shapes
-PASS n=1023  insert rotations 1013 (0.9902 per insert, predicted 1013: match)  delete rotations 1012 (0.9892 per delete; one-end order 502, 0.4907)  joins 10 shapes
-PASS n=1024  insert rotations 1013 (0.9893 per insert, predicted 1013: match)  delete rotations 1013 (0.9893 per delete; one-end order 503, 0.4912)  joins 10 shapes
-PASS n=10000  insert rotations 9986 (0.9986 per insert, predicted 9986: match)  delete rotations 9986 (0.9986 per delete; one-end order 4988, 0.4988)  joins 10 shapes
+== build: g++ -std=c++17 -O2 -Wall -Wextra -Wpedantic (checker, search, application, oracle)
+build exit code 0
+
+== ./build/adversarial.exe 1 2 3 4 5 6 7 8 9 13 15 16 17 100 500 1000 1001 1023 1024 10000
+PASS join rejects keys on the wrong side (including tied scores), accepts a valid tied join, and leaves rejected inputs intact
+PASS n=1  insert rotations 0 (0.0000 per insert, = n - bitlen(n))  delete rotations 0 (0.0000 per delete; one-end order 0, 0.0000)  tied keys ok  join shapes 10 (0 rotations inside joins)  random joins 100 (rotations inside: larger-left 0, larger-right 0)
+PASS n=2  insert rotations 0 (0.0000 per insert, = n - bitlen(n))  delete rotations 0 (0.0000 per delete; one-end order 0, 0.0000)  tied keys ok  join shapes 10 (2 rotations inside joins)  random joins 100 (rotations inside: larger-left 10, larger-right 6)
+PASS n=3  insert rotations 1 (0.3333 per insert, = n - bitlen(n))  delete rotations 0 (0.0000 per delete; one-end order 0, 0.0000)  tied keys ok  join shapes 10 (0 rotations inside joins)  random joins 100 (rotations inside: larger-left 8, larger-right 4)
+PASS n=4  insert rotations 1 (0.2500 per insert, = n - bitlen(n))  delete rotations 1 (0.2500 per delete; one-end order 1, 0.2500)  tied keys ok  join shapes 10 (8 rotations inside joins)  random joins 100 (rotations inside: larger-left 6, larger-right 8)
+PASS n=5  insert rotations 2 (0.4000 per insert, = n - bitlen(n))  delete rotations 3 (0.6000 per delete; one-end order 1, 0.2000)  tied keys ok  join shapes 10 (7 rotations inside joins)  random joins 100 (rotations inside: larger-left 12, larger-right 6)
+PASS n=6  insert rotations 3 (0.5000 per insert, = n - bitlen(n))  delete rotations 3 (0.5000 per delete; one-end order 1, 0.1667)  tied keys ok  join shapes 10 (0 rotations inside joins)  random joins 100 (rotations inside: larger-left 12, larger-right 7)
+PASS n=7  insert rotations 4 (0.5714 per insert, = n - bitlen(n))  delete rotations 3 (0.4286 per delete; one-end order 1, 0.1429)  tied keys ok  join shapes 10 (4 rotations inside joins)  random joins 100 (rotations inside: larger-left 6, larger-right 14)
+PASS n=8  insert rotations 4 (0.5000 per insert, = n - bitlen(n))  delete rotations 4 (0.5000 per delete; one-end order 2, 0.2500)  tied keys ok  join shapes 10 (5 rotations inside joins)  random joins 100 (rotations inside: larger-left 16, larger-right 11)
+PASS n=9  insert rotations 5 (0.5556 per insert, = n - bitlen(n))  delete rotations 6 (0.6667 per delete; one-end order 2, 0.2222)  tied keys ok  join shapes 10 (4 rotations inside joins)  random joins 100 (rotations inside: larger-left 6, larger-right 10)
+PASS n=13  insert rotations 9 (0.6923 per insert, = n - bitlen(n))  delete rotations 10 (0.7692 per delete; one-end order 3, 0.2308)  tied keys ok  join shapes 10 (8 rotations inside joins)  random joins 100 (rotations inside: larger-left 9, larger-right 10)
+PASS n=15  insert rotations 11 (0.7333 per insert, = n - bitlen(n))  delete rotations 10 (0.6667 per delete; one-end order 4, 0.2667)  tied keys ok  join shapes 10 (7 rotations inside joins)  random joins 100 (rotations inside: larger-left 18, larger-right 21)
+PASS n=16  insert rotations 11 (0.6875 per insert, = n - bitlen(n))  delete rotations 11 (0.6875 per delete; one-end order 5, 0.3125)  tied keys ok  join shapes 10 (8 rotations inside joins)  random joins 100 (rotations inside: larger-left 16, larger-right 11)
+PASS n=17  insert rotations 12 (0.7059 per insert, = n - bitlen(n))  delete rotations 13 (0.7647 per delete; one-end order 5, 0.2941)  tied keys ok  join shapes 10 (3 rotations inside joins)  random joins 100 (rotations inside: larger-left 16, larger-right 10)
+PASS n=100  insert rotations 93 (0.9300 per insert, = n - bitlen(n))  delete rotations 93 (0.9300 per delete; one-end order 44, 0.4400)  tied keys ok  join shapes 10 (5 rotations inside joins)  random joins 100 (rotations inside: larger-left 17, larger-right 12)
+PASS n=500  insert rotations 491 (0.9820 per insert, = n - bitlen(n))  delete rotations 491 (0.9820 per delete; one-end order 242, 0.4840)  tied keys ok  join shapes 10 (8 rotations inside joins)  random joins 100 (rotations inside: larger-left 6, larger-right 12)
+PASS n=1000  insert rotations 990 (0.9900 per insert, = n - bitlen(n))  delete rotations 990 (0.9900 per delete; one-end order 491, 0.4910)  tied keys ok  join shapes 10 (4 rotations inside joins)  random joins 100 (rotations inside: larger-left 15, larger-right 9)
+PASS n=1001  insert rotations 991 (0.9900 per insert, = n - bitlen(n))  delete rotations 992 (0.9910 per delete; one-end order 491, 0.4905)  tied keys ok  join shapes 10 (4 rotations inside joins)  random joins 100 (rotations inside: larger-left 14, larger-right 13)
+PASS n=1023  insert rotations 1013 (0.9902 per insert, = n - bitlen(n))  delete rotations 1012 (0.9892 per delete; one-end order 502, 0.4907)  tied keys ok  join shapes 10 (3 rotations inside joins)  random joins 100 (rotations inside: larger-left 8, larger-right 13)
+PASS n=1024  insert rotations 1013 (0.9893 per insert, = n - bitlen(n))  delete rotations 1013 (0.9893 per delete; one-end order 503, 0.4912)  tied keys ok  join shapes 10 (5 rotations inside joins)  random joins 100 (rotations inside: larger-left 8, larger-right 6)
+PASS n=10000  insert rotations 9986 (0.9986 per insert, = n - bitlen(n))  delete rotations 9986 (0.9986 per delete; one-end order 4988, 0.4988)  tied keys ok  join shapes 10 (2 rotations inside joins)  random joins 100 (rotations inside: larger-left 8, larger-right 4)
+exit code 0
+
+== same checker built with -O0 -D_GLIBCXX_DEBUG -D_GLIBCXX_ASSERTIONS -fsanitize=undefined -fsanitize-trap=undefined -static
+PASS lines: 15
+exit code 0
+
+== same checker built with -O3
+PASS lines: 3
 exit code 0
 
 == ./build/delete_search.exe
-mirror matches the real Avl rotation count on 200 random insert/delete sequences
+mirror matches the real Avl (rotation count and key order after every operation) on 200 random insert/delete sequences
 
-Greedy picks, as the rank among live keys (0 = first live key):
-  n=12  8 rotations, picks: 2 0 0 0 2 0 0 0 2 0 0 0
-  n=20  15 rotations, picks: 2 0 0 0 2 0 0 0 2 0 0 0 2 0 0 0 2 0 0 0
-  n=40  34 rotations, picks: 2 0 0 0 2 0 0 0 2 0 0 0 2 0 0 0 2 0 0 0 2 0 0 0 2 0 0 0 2 0 0 0 2 0 0 0 2 0 0 0
+Greedy picks, as the rank among live keys (0 = first live key), one size per n % 4:
+  n=20  (n%4=0) 15 rotations, picks: 2 0 0 0 2 0 0 0 2 0 0 0 2 0 0 0 2 0 0 0
+  n=21  (n%4=1) 17 rotations, picks: 3 0 0 0 0 2 0 0 0 2 0 0 0 2 0 0 0 2 0 0 0
+  n=22  (n%4=2) 17 rotations, picks: 0 0 2 0 0 0 2 0 0 0 2 0 0 0 2 0 0 0 2 0 0 0
+  n=23  (n%4=3) 17 rotations, picks: 0 0 0 2 0 0 0 2 0 0 0 2 0 0 0 2 0 0 0 2 0 0 0
 
-Greedy versus the fixed families (rotations per delete):
-       n   greedy     blocks    one end   n-bitlen
-      63       56         56         26         57
-     100       93         93         44         93
-     127      119        119         57        120
-     200      192        192         93        192
-     255      246        246        120        247
-     500      491        491        242        491
+Total delete rotations: greedy (on the mirror) versus the fixed families (real Avl):
+       n   greedy   rotation_deletes    one end   n-bitlen
+      63       56                 56         26         57
+     100       93                 93         44         93
+     127      119                119         57        120
+     200      192                192         93        192
+     255      246                246        120        247
+     500      491                491        242        491
+
+rotation_deletes versus greedy, every n = 1..200: equal 200, greedy better 0, rotation_deletes better 0
 
 rotation_deletes, every n = 1..3000: >= n-bitlen(n): 2250 sizes, exactly one less: 750, worse: 0
 
 Large sizes (real Avl, no per-step audit):
-  n=10000    blocks     9986 (0.9986 per delete)   one end     4988 (0.4988)
-  n=100000   blocks    99983 (0.9998 per delete)   one end    49984 (0.4998)
-  n=1000000  blocks   999980 (1.0000 per delete)   one end   499981 (0.5000)
+  n=10000    inserts     9986 (n-bitlen 9986)   blocks     9986 (0.9986 per delete)   one end     4988 (0.4988)
+  n=100000   inserts    99983 (n-bitlen 99983)   blocks    99983 (0.9998 per delete)   one end    49984 (0.4998)
+  n=1000000  inserts   999980 (n-bitlen 999980)   blocks   999980 (1.0000 per delete)   one end   499981 (0.5000)
+exit code 0
+
+== bash scratch/scratch-e/plant_bugs.sh
+subtree count ignores right child            caught: adversary error: left key after pivot, left input after rejection: AVL metadata/balance
+rotate_left skips fix(x)                     caught: adversary error: rotation_deletes step 1: AVL metadata/balance
+double-rotation test flipped                 caught: program crashed (exit 139)
+balance allows height gap 2                  caught: adversary error: rotation_inserts step 2: AVL metadata/balance
+join_nodes allows height gap 2               caught: adversary error: join 50+12 split, first part: AVL metadata/balance
+split puts subtree on wrong side             caught: adversary error: tied score split at 0: key order or side
+split_score off by one                       caught: adversary error: tied score split at -1: keys below
+pop_first skips rebalance                    caught: adversary error: middle-key deletes step 2: AVL metadata/balance
+erase drops right subtree                    caught: adversary error: missing pair key
+join no longer checks right side             caught: adversary error: right key before pivot: join accepted it
+join has no precondition check               caught: adversary error: left key after pivot: join accepted it
+join compares scores only                    caught: adversary error: tied join: a valid join was rejected (join ordering precondition)
+ties ordered by higher ID first              caught: adversary error: tied left key with a higher ID than the pivot: join accepted it
+rotate_right not counted                     caught: adversary error: tied inserts: rotation count differs from the untied family
+split loses the found pivot                  caught: adversary error: unequal split: sizes or pivot
+caught 15 of 15 planted faults
+exit code 0
+
+== python scratch/scratch-e/proof_checks.py
+Theorem 1, Lemmas 1-3, Invariants I-II: hold for every insert k = 1..3000
+Worked example: left {1..4} height 3, pivot 5, right {6..15} height 4, 4 join calls
+Lemma 4: holds on 20000 random joins (height gaps -10..10), and each used at most |hL-hR|+1 calls
+Theorem 2: on 3000 random splits, join calls per side were at most 1.00 x H (bound 4 x H)
 exit code 0
