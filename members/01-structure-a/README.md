@@ -10,7 +10,7 @@ This contribution implements an order statistic AVL tree for a leaderboard. It o
 - `INTERFACE.md`: API behavior, balancing, ownership, preconditions, and complexity.
 - `docs/derivations/D1.md`: ordered join derivation, diagrams, proof, and verification steps.
 - `docs/derivations/D1.pdf`: exported derivation.
-- `adversary/check.cpp`: adversarial correctness checks.
+- `scratch/scratch-a/avl_random.cpp`: randomized correctness checks against a practice model.
 - `TOOLS.md`: implementation and tool-use record.
 
 ## Build and run
@@ -18,13 +18,12 @@ This contribution implements an order statistic AVL tree for a leaderboard. It o
 From the repository root with a C++17 compiler:
 
 ```powershell
-New-Item -ItemType Directory -Force build
-g++ -std=c++17 -O2 -Wall -Wextra -pedantic -I. src/structA/avl.cpp adversary/check.cpp -o build/adversarial.exe
-./build/adversarial.exe 10000
+g++ -std=c++17 -O2 -Wall -Wextra -Wpedantic -I. src/structA/avl.cpp scratch/scratch-a/avl_random.cpp -o scratch/scratch-a/avl_random.exe
+./scratch/scratch-a/avl_random.exe
 ```
 
-The included harness can also be run with a smaller number for a quick check. The 10,000-entry run is the assignment's adversarial integration check.
+This harness checks 40,000 seeded insertions and deletions, rank, select, range, audit, split, and join. The assignment's separate adversarial integration check depends on Member 5's module.
 
 ## Change record
 
-The implementation validates ordered-join boundaries before transferring ownership. The accompanying harness exercises height-unequal join via split and rejoin, rejected joins, and core order-statistic operations. The derivation is authored under Chaitanya Sharma's name. No remote repository details were provided in the input archive, so this package is ready for local review and integration.
+The implementation validates ordered-join boundaries before transferring ownership. The accompanying harness exercises split and rejoin, rejected joins, and core order-statistic operations. The derivation is authored under Chaitanya Sharma's name.

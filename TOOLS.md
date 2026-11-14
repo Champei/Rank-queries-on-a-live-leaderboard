@@ -17,7 +17,18 @@ No benchmark timings were collected in these checks.
 | Tool | Use and changes |
 |:---:|---|
 | OpenAI Codex | Assisted with the Fenwick class implementation, D2 proof draft, random tester, PDF export script and documentation. Teerth wrote a standalone practice implementation and requested changes to names, type aliases and loops to match his preferred coding style. |
-| Apple clang 17.0.0 (`g++`, C++17) | Codex compiled and ran the application (1,000 players, 5,000 revisions), the existing differential test (10,000 operations, seed 253), the practice example and the sorted-array tester (120,000 random updates, seed 253, plus edge cases). All passed; output is in `scratch/member2-test-results.txt`. |
+| Apple clang 17.0.0 (`g++`, C++17) | Codex compiled and ran the application (1,000 players, 5,000 revisions), the existing differential test (10,000 operations, seed 253), the practice example and the sorted-array tester (120,000 random updates, seed 253, plus edge cases). All passed; output is now in `scratch/scratch-b/member2-test-results.txt`. |
 | ReportLab and PyMuPDF | Generated D2.pdf from D2.md and rendered its pages for visual inspection. |
+
+No benchmark timings were collected in these checks.
+
+---
+
+## Member 3: Architect
+
+| Tool | Use and changes |
+|:---:|---|
+| OpenAI Codex | Adapted the Member 3 starter ZIP, wrote the hash and application tests, expanded D3, aligned Architect and AVL standard-library namespace style with Member 2, and checked integration. |
+| MSYS2 g++ 16.2.0 | Compiled and ran the hash and application tests, 40,000 randomized AVL updates, 120,000 Fenwick updates, and a replay with 1,000,000 players and 1,000,000 revisions against the in-repository modules. All passed. |
 
 No benchmark timings were collected in these checks.
