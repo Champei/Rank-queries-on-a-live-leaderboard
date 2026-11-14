@@ -1,0 +1,18 @@
+# Test results — Structure A
+Date: 2026-11-14
+
+The requested filenames are retained. The `member2` report filename is kept to match the supplied layout; these files target Chaitanya’s Member 1 / Structure A AVL module.
+
+## C++ checks
+
+- Compiler: `g++.exe (Rev8, Built by MSYS2 project) 15.2.0`.
+- Both C++ files compiled with `-std=c++17 -O2 -Wall -Wextra -pedantic`; no compiler warnings.
+- PASS: `PASS 40000 randomized updates (80 rounds x 500), seed 253; rank/select/range, audit, split/join, score split and edge cases passed`
+- PASS: `practice entries: 4; competition rank(30): 2; select(2): score 30, player 1`
+
+## PDF exporter
+
+- PASS: Generated a valid two-page PDF (10,341 bytes) in a temporary project copy.
+- Export was checked in a temporary project copy; the existing `docs/derivations/D1.pdf` remains unchanged.
+
+All requested scratch checks passed.
