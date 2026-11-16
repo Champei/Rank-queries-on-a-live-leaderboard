@@ -24,7 +24,7 @@ No benchmark timings were collected in these checks.
 
 ---
 
-## Member 3: Architect
+## Member 3: Prathamesh Hingol - Architect
 
 | Tool | Use and changes |
 |:---:|---|
