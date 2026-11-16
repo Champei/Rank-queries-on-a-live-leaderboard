@@ -6,6 +6,8 @@ Shared contract for six-member integration. Language: C++17. Structures A and B 
 
 `Entry{score, player_id}` is ordered by **higher score first**, then **lower nonnegative player ID first**. IDs are unique within a league. Competition rank is `1 + number of players with strictly higher score`, so scores `[90, 80, 80, 70]` have ranks `[1, 2, 2, 4]`. A position, unlike a competition rank, identifies one element in the total pair order.
 
+Player IDs and scores use `ll`, an alias for `long long`. Container sizes, ranks, and positions use `size_t`.
+
 ## Structure A
 
 `Avl::insert/erase`, `rank(score)`, and `select(position)` are O(log n). `rank_range(first,last)` is O(log n + number returned), because writing the output takes time. `join(left,pivot,right)` requires all left pair keys before the pivot and all right pair keys after it; its target bound is O(|h_left-h_right|+1). `split(pivot)` returns the two strict sides and the optional exact pivot in O(log n). Every node stores height and subtree count. `audit()` verifies strict key ordering, AVL balance, heights and counts.

@@ -4,10 +4,10 @@
 using namespace std;
 
 namespace leaderboard {
-Leaderboard::Leaderboard(vector<int64_t> universe)
+Leaderboard::Leaderboard(vector<ll> universe)
     : universe_(move(universe)),
-      fenwick_(vector<ll>(universe_.begin(), universe_.end())) {}
-void Leaderboard::revise(int64_t id, int64_t score) {
+      fenwick_(universe_) {}
+void Leaderboard::revise(ll id, ll score) {
     if (id < 0) throw invalid_argument("negative player ID");
     // Validate that Fenwick can represent the new score before any mutation.
     if (!fenwick_.accepts(score))
@@ -20,11 +20,11 @@ void Leaderboard::revise(int64_t id, int64_t score) {
     players_.put(id, score);
     avl_.insert({score, id}); fenwick_.update(score, 1);
 }
-void Leaderboard::remove(int64_t id) {
+void Leaderboard::remove(ll id) {
     auto old = players_.get(id);
     avl_.erase({old, id}); fenwick_.update(old, -1); players_.erase(id);
 }
-size_t Leaderboard::rank(int64_t id) const {
+size_t Leaderboard::rank(ll id) const {
     auto score = players_.get(id);
     auto a = avl_.rank(score), b = fenwick_.rank(score);
     if (a != b) throw logic_error("structures disagree on rank");
@@ -50,7 +50,7 @@ size_t Leaderboard::audit() const {
     }
     return n;
 }
-Leaderboard Leaderboard::from_tree(const vector<int64_t>& universe, Avl&& tree) {
+Leaderboard Leaderboard::from_tree(const vector<ll>& universe, Avl&& tree) {
     Leaderboard out(universe);
     out.avl_ = move(tree);
     for (const auto& e : out.avl_.entries()) {
@@ -59,12 +59,12 @@ Leaderboard Leaderboard::from_tree(const vector<int64_t>& universe, Avl&& tree) 
     }
     return out;
 }
-pair<Leaderboard, Leaderboard> Leaderboard::split(int64_t threshold) {
+pair<Leaderboard, Leaderboard> Leaderboard::split(ll threshold) {
     auto [high, low] = avl_.split_score(threshold);
     auto a = from_tree(universe_, move(high));
     auto b = from_tree(universe_, move(low));
     players_ = PlayerHash();
-    fenwick_ = Fenwick(vector<ll>(universe_.begin(), universe_.end()));
+    fenwick_ = Fenwick(universe_);
     return {move(a), move(b)};
 }
 void Leaderboard::merge(Leaderboard& other) {
@@ -77,7 +77,6 @@ void Leaderboard::merge(Leaderboard& other) {
     }
     other.players_ = PlayerHash();
     other.avl_ = Avl();
-    other.fenwick_ = Fenwick(vector<ll>(other.universe_.begin(),
-                                             other.universe_.end()));
+    other.fenwick_ = Fenwick(other.universe_);
 }
 }

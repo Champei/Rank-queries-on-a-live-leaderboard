@@ -42,7 +42,7 @@ int main(int argc, char** argv) {
         auto sizes = full ? std::vector<std::size_t>{1000, 10000, 100000, 1000000}
                           : std::vector<std::size_t>{1000, 10000};
         for (auto n : sizes) {
-            std::vector<std::int64_t> universe;
+            std::vector<ll> universe;
             universe.reserve(n);
             for (std::size_t i = 0; i < n; ++i) universe.push_back(i);
             std::mt19937_64 rng(seed + n);
@@ -51,7 +51,7 @@ int main(int argc, char** argv) {
             std::shuffle(order.begin(), order.end(), rng);
             Avl avl; Fenwick fenwick(universe);
             for (auto i : order) {
-                avl.insert({static_cast<std::int64_t>(i), static_cast<std::int64_t>(i)});
+                avl.insert({static_cast<ll>(i), static_cast<ll>(i)});
                 fenwick.update(i, 1);
             }
             std::vector<double> arank, brank, aselect, bselect;
@@ -61,12 +61,12 @@ int main(int argc, char** argv) {
                 rng.seed(seed + n + trial);
                 auto start = Clock::now();
                 for (std::size_t i = 0; i < queries; ++i)
-                    sink = sink + avl.rank(static_cast<std::int64_t>(rng() % n));
+                    sink = sink + avl.rank(static_cast<ll>(rng() % n));
                 arank.push_back(us_per_op(start, queries));
                 rng.seed(seed + n + trial);
                 start = Clock::now();
                 for (std::size_t i = 0; i < queries; ++i)
-                    sink = sink + fenwick.rank(static_cast<std::int64_t>(rng() % n));
+                    sink = sink + fenwick.rank(static_cast<ll>(rng() % n));
                 brank.push_back(us_per_op(start, queries));
                 rng.seed(seed + n + trial);
                 start = Clock::now();
@@ -79,17 +79,17 @@ int main(int argc, char** argv) {
                     sink = sink + fenwick.select_score(1 + rng() % n);
                 bselect.push_back(us_per_op(start, queries));
                 Avl temp;
-                for (auto i : order) temp.insert({static_cast<std::int64_t>(i),
-                                                   static_cast<std::int64_t>(i)});
+                for (auto i : order) temp.insert({static_cast<ll>(i),
+                                                   static_cast<ll>(i)});
                 double split_us = 0, join_us = 0;
                 constexpr std::size_t repetitions = 1000;
                 for (std::size_t repeat = 0; repeat < repetitions; ++repeat) {
                     start = Clock::now();
-                    auto [high, low] = temp.split_score(static_cast<std::int64_t>(n / 2));
+                    auto [high, low] = temp.split_score(static_cast<ll>(n / 2));
                     split_us += std::chrono::duration<double, std::micro>(Clock::now() - start).count();
                     auto [unused, pivot, below] =
-                        low.split({static_cast<std::int64_t>(n / 2),
-                                   static_cast<std::int64_t>(n / 2)});
+                        low.split({static_cast<ll>(n / 2),
+                                   static_cast<ll>(n / 2)});
                     if (!pivot || unused.size()) throw std::logic_error("split pivot");
                     start = Clock::now();
                     temp = Avl::join(std::move(high), *pivot, std::move(below));
@@ -97,10 +97,10 @@ int main(int argc, char** argv) {
                 }
                 asplit.push_back(split_us / repetitions);
                 ajoin.push_back(join_us / repetitions);
-                std::vector<std::int64_t> left, right;
+                std::vector<ll> left, right;
                 left.reserve(n); right.reserve(n);
                 for (auto score : universe)
-                    (score > static_cast<std::int64_t>(n / 2) ? left : right).push_back(score);
+                    (score > static_cast<ll>(n / 2) ? left : right).push_back(score);
                 start = Clock::now();
                 auto f1 = Fenwick::rebuild(universe, left);
                 auto f2 = Fenwick::rebuild(universe, right);

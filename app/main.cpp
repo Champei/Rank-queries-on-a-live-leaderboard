@@ -1,5 +1,4 @@
 #include "app/leaderboard.hpp"
-#include <cstdint>
 #include <iostream>
 #include <random>
 #include <stdexcept>
@@ -14,14 +13,14 @@ int main(int argc, char** argv) {
         if (argc > 1) players = stoull(argv[1]);
         if (argc > 2) revisions = stoull(argv[2]);
         if (players == 0) throw invalid_argument("players must be positive");
-        vector<int64_t> scores;
+        vector<ll> scores;
         for (int s = 0; s <= 10000; ++s) scores.push_back(s);
         Leaderboard board(scores);
         mt19937_64 rng(253);
         for (size_t i = 0; i < players; ++i)
-            board.revise(static_cast<int64_t>(i), rng() % 10001);
+            board.revise(static_cast<ll>(i), rng() % 10001);
         for (size_t i = 0; i < revisions; ++i) {
-            auto id = static_cast<int64_t>(rng() % players);
+            auto id = static_cast<ll>(rng() % players);
             board.revise(id, rng() % 10001);
             if (i % 10000 == 0) {
                 auto rank = board.rank(id);
