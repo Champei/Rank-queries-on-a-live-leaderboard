@@ -1,11 +1,12 @@
 #include "app/player_hash.hpp"
+#include <cstdint>
 #include <stdexcept>
 
 using namespace std;
 
 namespace leaderboard {
 PlayerHash::PlayerHash() : cells_(8) {}
-pair<size_t, bool> PlayerHash::slot(int64_t id) const {
+pair<size_t, bool> PlayerHash::slot(ll id) const {
     auto mask = cells_.size() - 1;
     auto at = (static_cast<uint64_t>(id) * 11400714819323198485ull) & mask;
     size_t tomb = cells_.size();
@@ -22,13 +23,13 @@ void PlayerHash::resize(size_t capacity) {
     live_ = occupied_ = 0;
     for (const auto& cell : old) if (cell.state == 1) put(cell.id, cell.score);
 }
-bool PlayerHash::contains(int64_t id) const { return slot(id).second; }
-int64_t PlayerHash::get(int64_t id) const {
+bool PlayerHash::contains(ll id) const { return slot(id).second; }
+ll PlayerHash::get(ll id) const {
     auto [at, found] = slot(id);
     if (!found) throw out_of_range("unknown player ID");
     return cells_[at].score;
 }
-void PlayerHash::put(int64_t id, int64_t score) {
+void PlayerHash::put(ll id, ll score) {
     if (id < 0) throw invalid_argument("negative player ID");
     if ((occupied_ + 1) * 10 >= cells_.size() * 7) resize(cells_.size() * 2);
     auto [at, found] = slot(id);
@@ -38,15 +39,15 @@ void PlayerHash::put(int64_t id, int64_t score) {
     }
     cells_[at] = {id, score, 1};
 }
-void PlayerHash::erase(int64_t id) {
+void PlayerHash::erase(ll id) {
     auto [at, found] = slot(id);
     if (!found) throw out_of_range("unknown player ID");
     cells_[at].state = 2; --live_;
     if (cells_.size() > 8 && live_ * 4 < cells_.size()) resize(cells_.size() / 2);
     else if (occupied_ > 2 * live_ + 8) resize(cells_.size());
 }
-vector<pair<int64_t, int64_t>> PlayerHash::entries() const {
-    vector<pair<int64_t, int64_t>> out;
+vector<pair<ll, ll>> PlayerHash::entries() const {
+    vector<pair<ll, ll>> out;
     out.reserve(live_);
     for (const auto& c : cells_) if (c.state == 1) out.emplace_back(c.id, c.score);
     return out;

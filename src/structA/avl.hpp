@@ -7,7 +7,7 @@
 #include <vector>
 
 namespace leaderboard {
-using std::int64_t;
+using ll = long long;
 using std::optional;
 using std::pair;
 using std::size_t;
@@ -16,8 +16,8 @@ using std::uint64_t;
 using std::vector;
 
 struct Entry {
-    int64_t score;
-    int64_t player_id;
+    ll score;
+    ll player_id;
 };
 // Higher score first; ties use smaller player ID first.
 bool before(const Entry& a, const Entry& b);
@@ -35,7 +35,7 @@ public:
     void insert(Entry entry);
     void erase(Entry entry);
     size_t size() const;
-    size_t rank(int64_t score) const; // competition rank, one based
+    size_t rank(ll score) const; // competition rank, one based
     Entry select(size_t position) const;  // one based, player ID tie break
     vector<Entry> rank_range(size_t first, size_t last) const;
     vector<Entry> entries() const;
@@ -47,7 +47,7 @@ public:
     // Destructive split around an arbitrary pair key.
     tuple<Avl, optional<Entry>, Avl> split(Entry pivot);
     // Destructive split into scores > threshold and scores <= threshold.
-    pair<Avl, Avl> split_score(int64_t threshold);
+    pair<Avl, Avl> split_score(ll threshold);
 
 private:
     struct Node {

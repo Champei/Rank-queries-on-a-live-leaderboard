@@ -101,7 +101,7 @@ Avl::Node* Avl::erase_node(Node* n, Entry e) {
 }
 void Avl::erase(Entry e) { root_ = erase_node(root_, e); }
 size_t Avl::size() const { return count(root_); }
-size_t Avl::rank(int64_t score) const {
+size_t Avl::rank(ll score) const {
     size_t higher = 0;
     const Node* n = root_;
     while (n) {
@@ -201,7 +201,7 @@ tuple<Avl, optional<Entry>, Avl> Avl::split(Entry pivot) {
     Avl a, b; a.root_ = left; b.root_ = right;
     return {move(a), found, move(b)};
 }
-pair<Avl, Avl> Avl::split_score(int64_t threshold) {
+pair<Avl, Avl> Avl::split_score(ll threshold) {
     auto [high, found, low] = split({threshold, -1});
     if (found) throw logic_error("negative sentinel ID collided");
     return {move(high), move(low)};

@@ -28,8 +28,8 @@ No benchmark timings were collected in these checks.
 
 | Tool | Use and changes |
 |:---:|---|
-| OpenAI Codex | Adapted the Member 3 starter ZIP, wrote the hash and application tests, expanded D3, aligned Architect and AVL standard-library namespace style with Member 2, and checked integration. |
-| MSYS2 g++ 16.2.0 | Compiled and ran the hash and application tests, 40,000 randomized AVL updates, 120,000 Fenwick updates, and a replay with 1,000,000 players and 1,000,000 revisions against the in-repository modules. All passed. |
+| OpenAI Codex | Adapted the Member 3 existing code, wrote the application tests, expanded D3, aligned Architect and AVL namespace style with Member 2, and changed player IDs and scores to the existing `ll` alias. Container sizes and positions remain `size_t`. |
+| MSYS2 g++ 16.2.0 | Compiled the application, oracle, adversary and benchmark after the type change. The hash and application tests, 10,000-operation differential check, 500-player adversarial check, and replay with 1,000,000 players and 1,000,000 revisions passed. Earlier checks covered 40,000 randomized AVL updates and 120,000 Fenwick updates. |
 
 No benchmark timings were collected in these checks.
 
