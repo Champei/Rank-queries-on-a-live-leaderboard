@@ -24,68 +24,37 @@ This project implements a live leaderboard with two complementary data structure
   - Recorded environments include MinGW-w64 GCC 16.2.0 and Apple clang 17.
 - Build system: No Makefile or CMake configuration is included. Use the commands below.
 
-## Clone and run CSV queries (Windows PowerShell)
+## Quick start: CSV queries (Windows PowerShell)
 
-With Git and a C++17 `g++` compiler installed, run:
+With Git and a C++17 `g++` compiler installed:
 
-```powershell
-git clone https://github.com/Champei/Rank-queries-on-a-live-leaderboard.git
-cd Rank-queries-on-a-live-leaderboard
-g++ -std=c++17 -O2 -I. src/structA/avl.cpp src/structB/fenwick.cpp app/player_hash.cpp app/leaderboard.cpp app/main.cpp -o leaderboard_app.exe
-.\leaderboard_app.exe --queries .\players_synthetic.csv .\queries_synthetic.txt .\players_updated.csv | Tee-Object -FilePath .\query_results.txt
-```
+1. Clone the repository.
 
-The repository includes `players_synthetic.csv`, `players_merge.csv`, and `queries_synthetic.txt`. Edit `queries_synthetic.txt` under `# Queries here:`, save it, and rerun the last command to execute your queries. The commented lines show examples. Answers print in the terminal and go to `query_results.txt`; the final player scores go to `players_updated.csv`. The input CSV stays unchanged.
+   ```powershell
+   git clone https://github.com/Champei/Rank-queries-on-a-live-leaderboard.git
+   cd Rank-queries-on-a-live-leaderboard
+   ```
 
-To print the ranked input CSV without running numbered queries:
+2. Build the application.
 
-```powershell
-.\leaderboard_app.exe --file .\players_synthetic.csv
-```
+   ```powershell
+   g++ -std=c++17 -O2 -I. src/structA/avl.cpp src/structB/fenwick.cpp app/player_hash.cpp app/leaderboard.cpp app/main.cpp -o leaderboard_app.exe
+   ```
 
-## Build
+3. Edit the included CSV data and query file. `players_synthetic.csv` starts with the `player_id,score` header. `players_merge.csv` is available for a type `1` merge query. Add queries under `# Queries here:` in `queries_synthetic.txt`; its commented lines show examples.
 
-From the repository root:
+   ```powershell
+   notepad .\players_synthetic.csv
+   notepad .\queries_synthetic.txt
+   ```
 
-```bash
-mkdir -p build
+4. Run the queries using the CSV data.
 
-g++ -std=c++17 -O2 -Wall -Wextra -Wpedantic -I. \
-  src/structA/avl.cpp \
-  src/structB/fenwick.cpp \
-  app/player_hash.cpp \
-  app/leaderboard.cpp \
-  app/main.cpp \
-  -o build/leaderboard_app
-```
+   ```powershell
+   .\leaderboard_app.exe --queries .\players_synthetic.csv .\queries_synthetic.txt .\players_updated.csv | Tee-Object -FilePath .\query_results.txt
+   ```
 
-On Windows PowerShell, create the build directory with:
-
-```powershell
-New-Item -ItemType Directory -Force build
-```
-
-Then run the same `g++` command, using `build/leaderboard_app.exe` as the output path.
-
-## Quick start
-
-Run the deterministic demo replay with 1,000 players and 5,000 score revisions:
-
-```bash
-./build/leaderboard_app 1000 5000
-```
-
-The replay prints sample rank and selection results, positions 40 through 50, performs a season split at score 5000, merges the partitions, and audits the result. A successful default run ends with:
-
-```text
-merged: 1000 players
-```
-
-The application accepts two optional arguments:
-
-```text
-leaderboard_app <player_count> <revision_count>
-```
+Answers appear in the terminal and `query_results.txt`. The final player scores are saved to `players_updated.csv`; the starting CSV stays unchanged.
 
 ## Tests
 
