@@ -24,6 +24,25 @@ This project implements a live leaderboard with two complementary data structure
   - Recorded environments include MinGW-w64 GCC 16.2.0 and Apple clang 17.
 - Build system: No Makefile or CMake configuration is included. Use the commands below.
 
+## Clone and run CSV queries (Windows PowerShell)
+
+With Git and a C++17 `g++` compiler installed, run:
+
+```powershell
+git clone https://github.com/Champei/Rank-queries-on-a-live-leaderboard.git
+cd Rank-queries-on-a-live-leaderboard
+g++ -std=c++17 -O2 -I. src/structA/avl.cpp src/structB/fenwick.cpp app/player_hash.cpp app/leaderboard.cpp app/main.cpp -o leaderboard_app.exe
+.\leaderboard_app.exe --queries .\players_synthetic.csv .\queries_synthetic.txt .\players_updated.csv | Tee-Object -FilePath .\query_results.txt
+```
+
+The repository includes `players_synthetic.csv`, `players_merge.csv`, and `queries_synthetic.txt`. Edit `queries_synthetic.txt` under `# Queries here:`, save it, and rerun the last command to execute your queries. The commented lines show examples. Answers print in the terminal and go to `query_results.txt`; the final player scores go to `players_updated.csv`. The input CSV stays unchanged.
+
+To print the ranked input CSV without running numbered queries:
+
+```powershell
+.\leaderboard_app.exe --file .\players_synthetic.csv
+```
+
 ## Build
 
 From the repository root:
@@ -109,7 +128,7 @@ See `TOOLS.md` and the member test-result files for the commands and status reco
 
 ## Evaluation interface (hidden tests)
 
-There is no `run_ops` executable or published line-based operations protocol in this archive. The demo application accepts player and revision counts; it is not a hidden-test operations runner.
+There is no `run_ops` executable. The application supports the CSV-backed `--queries` mode above as well as the numeric demo replay; hidden tests can call the public C++ interfaces below.
 
 The public C++ interfaces are declared in:
 
