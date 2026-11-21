@@ -2,25 +2,25 @@
 from pathlib import Path
 from html import escape
 import re
-from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, Preformatted, Table, TableStyle
+from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, Preformatted, Table, TableStyle, PageBreak
 from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
 from reportlab.lib import colors
 from reportlab.lib.enums import TA_LEFT
 from reportlab.lib.pagesizes import A4
 
-ROOT = Path(__file__).resolve().parents[1]
+ROOT = Path(__file__).resolve().parents[2]
 source = ROOT / 'docs/derivations/D2.md'
-output = ROOT / 'docs/derivations/D2.pdf'
+output = ROOT / 'docs/derivations/D2_250001027.pdf'
 styles = getSampleStyleSheet()
-styles.add(ParagraphStyle(name='BodyD2', fontName='Helvetica', fontSize=10.5, leading=15, spaceAfter=8))
+styles.add(ParagraphStyle(name='BodyD2', fontName='Helvetica', fontSize=10, leading=13, spaceAfter=6))
 styles.add(ParagraphStyle(name='CellD2', fontName='Helvetica', fontSize=9, leading=12))
 styles.add(ParagraphStyle(name='CodeD2', fontName='Courier', fontSize=8, leading=11, leftIndent=10, spaceBefore=5, spaceAfter=10))
-styles['Title'].fontSize = 20
-styles['Title'].leading = 25
+styles['Title'].fontSize = 18
+styles['Title'].leading = 22
 styles['Title'].alignment = TA_LEFT
 styles['Heading2'].fontSize = 13
 styles['Heading2'].leading = 17
-styles['Heading2'].spaceBefore = 12
+styles['Heading2'].spaceBefore = 8
 
 def inline(s):
     s = escape(s.replace('—', '-').replace('’', "'"))
@@ -51,7 +51,7 @@ while i < len(lines):
             if not all(re.fullmatch(r'[:\- ]+', c) for c in cells):
                 rows.append([Paragraph(inline(c), styles['CellD2']) for c in cells])
             i += 1
-        widths = [79,64,59,77,204] if len(rows[0]) == 5 else [45,70,185,183]
+        widths = [107,72,80,130,94] if len(rows[0]) == 5 else [45,70,185,183]
         table = Table(rows, colWidths=widths, repeatRows=1, hAlign='LEFT')
         table.setStyle(TableStyle([
             ('BACKGROUND',(0,0),(-1,0),colors.HexColor('#e7edf4')),
@@ -62,6 +62,8 @@ while i < len(lines):
         ]))
         story.extend([table, Spacer(1,10)])
         continue
+    if line == '## Worked example, including zero counts':
+        story.append(PageBreak())
     if line.startswith('# '):
         style, content = styles['Title'], line[2:]
     elif line.startswith('## '):
@@ -81,7 +83,7 @@ def footer(canvas, doc):
     canvas.drawRightString(A4[0]-56,29,str(doc.page))
 
 SimpleDocTemplate(str(output), pagesize=A4, rightMargin=56, leftMargin=56,
-                 topMargin=45, bottomMargin=48, title='D2: Correctness of Fenwick binary lifting',
+                 topMargin=45, bottomMargin=48, title='D2: Fenwick binary-lifting descent',
                  author='Teerth (250001027)').build(story,onFirstPage=footer,onLaterPages=footer)
 print(output)
 
@@ -92,5 +94,5 @@ doc = pymupdf.open(output)
 for n,page in enumerate(doc):
     page.get_pixmap(matrix=pymupdf.Matrix(1.3,1.3)).save(render_dir/f'page-{n+1}.png')
 text = '\n'.join(page.get_text() for page in doc)
-assert 'Teerth' in text and 'Why the allowed universe' in text and 'loop' in text.lower()
+assert '250001027' in text and 'fixed universe' in text and len(doc) == 2
 print(f'{len(doc)} pages; text extraction checks passed; previews: {render_dir}')

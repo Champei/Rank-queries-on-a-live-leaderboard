@@ -1,6 +1,6 @@
 # Member 2: Teerth (250001027) - Structure B
 
-Own `src/structB/fenwick.hpp`, `src/structB/fenwick.cpp` and `docs/derivations/D2.md`/`D2.pdf`. The Fenwick stores counts over a fixed, compressed score universe. It returns competition ranks and selected scores; the AVL resolves player IDs and their tie order.
+Own `src/structB/fenwick.hpp`, `src/structB/fenwick.cpp` and `docs/derivations/D2.md`/`D2_250001027.pdf`. The Fenwick stores counts over a fixed, compressed score universe. It returns competition ranks and selected scores; the AVL resolves player IDs and their tie order.
 
 The implementation and proof are AI-assisted; see `TOOLS.md`. Review the proof and practise modifying the module before the viva. This module is present in the shared repository.
 
@@ -55,7 +55,7 @@ git switch -c member2-fenwick
 Compare and copy only your owned files from this folder into the clone. Keep other members' newer work. Merge the Member 2 section of `TOOLS.md` rather than replacing teammates' notes. Include these files:
 
 - `src/structB/fenwick.hpp` and `fenwick.cpp`
-- `docs/derivations/D2.md` and `D2.pdf`
+- `docs/derivations/D2.md` and `D2_250001027.pdf`
 - `members/02-structure-b/README.md`, `viva.md`, `PR.md`
 - `scratch/scratch-b/mine.cpp`, `scratch/scratch-b/fenwick_random.cpp`, `scratch/scratch-b/member2-test-results.txt`, `scratch/scratch-b/export_d2.py`
 - The merged `TOOLS.md`
@@ -63,7 +63,7 @@ Compare and copy only your owned files from this folder into the clone. Keep oth
 Run the commands above inside the clone. Then stage the explicit files:
 
 ```bash
-git add src/structB/fenwick.hpp src/structB/fenwick.cpp docs/derivations/D2.md docs/derivations/D2.pdf members/02-structure-b/README.md members/02-structure-b/viva.md members/02-structure-b/PR.md scratch/scratch-b/mine.cpp scratch/scratch-b/fenwick_random.cpp scratch/scratch-b/member2-test-results.txt scratch/scratch-b/export_d2.py TOOLS.md
+git add src/structB/fenwick.hpp src/structB/fenwick.cpp docs/derivations/D2.md docs/derivations/D2_250001027.pdf members/02-structure-b/README.md members/02-structure-b/viva.md members/02-structure-b/PR.md scratch/scratch-b/mine.cpp scratch/scratch-b/fenwick_random.cpp scratch/scratch-b/member2-test-results.txt scratch/scratch-b/export_d2.py TOOLS.md
 git diff --cached --stat
 git diff --cached
 git commit -m "Complete Fenwick module, D2 proof and validation"
@@ -82,4 +82,4 @@ python3 -m venv /private/tmp/teerth-d2-export
 /private/tmp/teerth-d2-export/bin/python scratch/scratch-b/export_d2.py
 ```
 
-This replaces `docs/derivations/D2.pdf` from `D2.md` and renders previews in `/private/tmp/teerth-d2-preview/`. Review all pages after changing the Markdown.
+This replaces `docs/derivations/D2_250001027.pdf` from `D2.md` and renders previews in `/private/tmp/teerth-d2-preview/`. Review all pages after changing the Markdown.
