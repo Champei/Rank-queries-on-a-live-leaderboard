@@ -1,4 +1,4 @@
-#include "app/leaderboard.hpp"
+#include "include/leaderboard.hpp"
 #include "oracle/reference.hpp"
 #include <algorithm>
 #include <cstdint>

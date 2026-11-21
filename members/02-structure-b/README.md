@@ -29,8 +29,8 @@ Expected success: `PASS 120000 random updates (300 universes x 400), seed 253; e
 Integrated application:
 
 ```bash
-g++ -std=c++17 -Wall -Wextra -Wpedantic -I. src/structA/avl.cpp src/structB/fenwick.cpp app/player_hash.cpp app/leaderboard.cpp app/main.cpp -o scratch/scratch-c/leaderboard_app
-./scratch/scratch-c/leaderboard_app 1000 5000
+bash scripts/build.sh
+./build/leaderboard_app 1000 5000
 ```
 
 After Member 4's oracle module arrives, run its differential tester:

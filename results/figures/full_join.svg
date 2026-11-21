@@ -1,0 +1,53 @@
+<svg xmlns='http://www.w3.org/2000/svg' width='900' height='560' viewBox='0 0 900 560'>
+<rect width='900' height='560' fill='white'/>
+<text x='70' y='35' font-family='sans-serif' font-size='22'>Ordered join versus rebuild</text>
+<path d='M70 65 V480 H850' fill='none' stroke='black'/>
+<text x='360' y='535' font-family='sans-serif'>log scale: number of players</text>
+<text x='8' y='55' font-family='sans-serif'>microseconds/op</text>
+<path d='M70 480 H850' stroke='#ddd'/><text x='15' y='484' font-family='sans-serif' font-size='12'>0</text>
+<path d='M70 400 H850' stroke='#ddd'/><text x='15' y='404' font-family='sans-serif' font-size='12'>37737.9</text>
+<path d='M70 320 H850' stroke='#ddd'/><text x='15' y='324' font-family='sans-serif' font-size='12'>75475.8</text>
+<path d='M70 240 H850' stroke='#ddd'/><text x='15' y='244' font-family='sans-serif' font-size='12'>113214</text>
+<path d='M70 160 H850' stroke='#ddd'/><text x='15' y='164' font-family='sans-serif' font-size='12'>150952</text>
+<path d='M70 80 H850' stroke='#ddd'/><text x='15' y='84' font-family='sans-serif' font-size='12'>188689</text>
+<polyline fill='none' stroke='#1259a5' stroke-width='3' points='70,480 330,480 590,480 850,480 '/>
+<path d='M70 480 V480' stroke='#1259a5'/>
+<circle cx='70' cy='480' r='4' fill='#1259a5'/>
+<path d='M330 480 V480' stroke='#1259a5'/>
+<circle cx='330' cy='480' r='4' fill='#1259a5'/>
+<path d='M590 480 V480' stroke='#1259a5'/>
+<circle cx='590' cy='480' r='4' fill='#1259a5'/>
+<path d='M850 480 V480' stroke='#1259a5'/>
+<circle cx='850' cy='480' r='4' fill='#1259a5'/>
+<text x='600' y='60' fill='#1259a5' font-family='sans-serif'>AVL ordered join</text>
+<polyline fill='none' stroke='#c44914' stroke-width='3' points='70,479.829 330,477.699 590,454.127 850,131.029 '/>
+<path d='M70 479.812 V479.846' stroke='#c44914'/>
+<circle cx='70' cy='479.829' r='4' fill='#c44914'/>
+<path d='M330 477.252 V478.147' stroke='#c44914'/>
+<circle cx='330' cy='477.699' r='4' fill='#c44914'/>
+<path d='M590 449.113 V459.14' stroke='#c44914'/>
+<circle cx='590' cy='454.127' r='4' fill='#c44914'/>
+<path d='M850 80 V182.057' stroke='#c44914'/>
+<circle cx='850' cy='131.029' r='4' fill='#c44914'/>
+<text x='600' y='82' fill='#c44914' font-family='sans-serif'>Fenwick join rebuild</text>
+<polyline fill='none' stroke='#6694c7' stroke-width='3' stroke-dasharray='7 5' points=''/>
+<path d='M70 480 V480' stroke='#6694c7'/>
+<circle cx='70' cy='480' r='4' fill='#6694c7'/>
+<path d='M330 480 V480' stroke='#6694c7'/>
+<circle cx='330' cy='480' r='4' fill='#6694c7'/>
+<path d='M590 480 V480' stroke='#6694c7'/>
+<circle cx='590' cy='480' r='4' fill='#6694c7'/>
+<path d='M850 480 V480' stroke='#6694c7'/>
+<circle cx='850' cy='480' r='4' fill='#6694c7'/>
+<text x='600' y='104' fill='#6694c7' font-family='sans-serif'>AVL constant-height shape</text>
+<polyline fill='none' stroke='#e39a74' stroke-width='3' stroke-dasharray='7 5' points=''/>
+<path d='M70 479.829 V479.829' stroke='#e39a74'/>
+<circle cx='70' cy='479.829' r='4' fill='#e39a74'/>
+<path d='M330 477.723 V477.723' stroke='#e39a74'/>
+<circle cx='330' cy='477.723' r='4' fill='#e39a74'/>
+<path d='M590 451.537 V451.537' stroke='#e39a74'/>
+<circle cx='590' cy='451.537' r='4' fill='#e39a74'/>
+<path d='M850 138.444 V138.444' stroke='#e39a74'/>
+<circle cx='850' cy='138.444' r='4' fill='#e39a74'/>
+<text x='600' y='126' fill='#e39a74' font-family='sans-serif'>Fenwick n log n shape</text>
+</svg>

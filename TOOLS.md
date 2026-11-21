@@ -55,3 +55,28 @@ No benchmark timings were collected in these checks.
 | Python, Chrome and PyMuPDF | Checked the D5 lemmas and worked example numerically (`proof_checks.py`), exported D5.pdf from D5.md and rendered its pages for visual inspection. |
 
 No benchmark timings were collected in these checks.
+
+---
+
+## Member 6: Sarthak Pandey (250001063) - Analyst
+
+The benchmark harness and first predicted-cost model entered through PR #12. Sarthak's own tool versions, affected-file review, and representative AI prompts have not been supplied in this checkout; Sarthak must complete this declaration from the tools actually used.
+
+---
+
+## Submission integration, 2026-11-21
+
+| Tool and version | Used by | Used for | Files affected | What was changed or verified |
+|---|---|---|---|---|
+| OpenAI Codex (model version not recorded) | Prathamesh Hingol | Guideline audit, build and test integration, report drafting | `include/`, `tests/`, `scripts/`, `README.md`, `REPORT.md`, `INTERFACE.md`, `bench/plot.cpp`, `docs/derivations/` | Checked the supplied PDF, moved existing interfaces and tests into required folders, built the complete application, passed a one-million-operation differential run and a one-million-player replay, measured five trials per benchmark point, and marked unverified facts. Team members should review the prose and proofs before submission. |
+| MSYS2 MinGW-w64 GCC 16.2.0 | Prathamesh Hingol | C++17 build and runtime checks | `build/` (ignored) | Built application, oracle, adversary, focused tests, benchmark, and plotter with `-O2 -Wall -Wextra -Wpedantic`. |
+| Git Bash 2.51.0.windows.2 | Prathamesh Hingol | One-command build and test execution | `scripts/`, `tests/` | Ran the shell scripts; Windows line endings were normalized only for text-output comparisons. |
+| Python 3.13.7 standard library | Prathamesh Hingol | SVG XML and PDF text checks | `results/figures/`, `REPORT.pdf`, `docs/derivations/`, `docs/slides/` | Parsed four SVGs, checked benchmark CSV rows, and verified PDF page counts and required text. |
+| Chrome 158.0.8127.36 | Prathamesh Hingol | Local PDF export from Markdown-rendered HTML and slide HTML | `REPORT.pdf`, `docs/derivations/*.pdf`, `docs/slides/slides.pdf` | Printed the 15-page report, six one-to-two-page derivations, and nine-slide deck; checked extracted text. |
+
+### Representative AI prompts actually available from this integration
+
+- 2026-11-21, OpenAI Codex: “check if all the submission guidelines are full filled or not , if not give the implmentation plan to fix it”
+- 2026-11-21, OpenAI Codex: “change the possible fixes”
+
+Earlier Codex and Claude Code prompts should be added by the respective members from their own conversation records; their exact wording and dates are not available in this checkout.

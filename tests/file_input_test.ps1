@@ -1,4 +1,5 @@
-$exe = Join-Path $PSScriptRoot 'leaderboard_app.exe'
+$root = (Resolve-Path (Join-Path $PSScriptRoot '..')).Path
+$exe = Join-Path $root 'build/leaderboard_app.exe'
 $csv = Join-Path $PSScriptRoot 'players_sample.csv'
 $actual = & $exe --file $csv
 if ($LASTEXITCODE -ne 0) { throw 'CSV run failed' }
@@ -11,7 +12,6 @@ $expected = @(
 )
 if (($actual -join "`n") -ne ($expected -join "`n")) { throw 'CSV ranking differs from expected result' }
 
-$root = (Resolve-Path (Join-Path $PSScriptRoot '../..')).Path
 $queries = Join-Path $PSScriptRoot 'queries_sample.txt'
 $updated = Join-Path $PSScriptRoot 'players_updated_test.csv'
 Push-Location $root
