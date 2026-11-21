@@ -2,7 +2,7 @@
 
 Your topic is the predicted-cost model, five-trial measurements, figures, and cache evidence. Own `bench/benchmark.cpp`, `plot.cpp`, `REPORT.md`, `results/`, and `docs/derivations/D6.md`. The benchmark compares AVL and Fenwick rank/select across sizes, isolated AVL score split and ordered join against Fenwick rebuilds. It records seed 253, all five trial times, mean, and sample standard deviation. `plot_results` turns the CSV into four SVGs.
 
-The prediction is already written in `REPORT.md`; preserve its pre-measurement status. After integration, run `./build/benchmark.exe --full results/full.csv`, then `./build/plot_results.exe results/full.csv results/full`. State processor, caches, compiler, flags, date, and full-scale replay results in the report. A claim about cache behavior needs profiler output. Complete D6 with your name and comparison of predictions with real measurements, then export `docs/derivations/D6.pdf`.
+The prediction was committed before measurement in `0f3543f`; preserve its provenance in `REPORT.md`. Run `bash scripts/run_all.sh` to regenerate `results/raw/full.csv` and the four figures in `results/figures/`. The report now records the measured means, compiler, processor, and date; RAM and cache sizes still need confirmation. A claim about cache behavior needs profiler output. D6 should compare the model with these measurements before its PDF export.
 
 ## Push your contribution
 
@@ -17,4 +17,4 @@ git commit -m "Add cost model and benchmark harness"
 git push -u origin member6-analyst
 ```
 
-Open a pull request and request a teammate's review. Commit real `results/full.csv`, generated figures, machine details, and analysis in later commits across the project period. Record your actual changes in `TOOLS.md`.
+Open a pull request and request a teammate's review. Commit the raw results, figures, completed machine details, and analysis with the integration changes. Record actual tools and prompts in `TOOLS.md`.

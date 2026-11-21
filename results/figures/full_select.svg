@@ -1,0 +1,53 @@
+<svg xmlns='http://www.w3.org/2000/svg' width='900' height='560' viewBox='0 0 900 560'>
+<rect width='900' height='560' fill='white'/>
+<text x='70' y='35' font-family='sans-serif' font-size='22'>Select latency</text>
+<path d='M70 65 V480 H850' fill='none' stroke='black'/>
+<text x='360' y='535' font-family='sans-serif'>log scale: number of players</text>
+<text x='8' y='55' font-family='sans-serif'>microseconds/op</text>
+<path d='M70 480 H850' stroke='#ddd'/><text x='15' y='484' font-family='sans-serif' font-size='12'>0</text>
+<path d='M70 400 H850' stroke='#ddd'/><text x='15' y='404' font-family='sans-serif' font-size='12'>0.541259</text>
+<path d='M70 320 H850' stroke='#ddd'/><text x='15' y='324' font-family='sans-serif' font-size='12'>1.08252</text>
+<path d='M70 240 H850' stroke='#ddd'/><text x='15' y='244' font-family='sans-serif' font-size='12'>1.62378</text>
+<path d='M70 160 H850' stroke='#ddd'/><text x='15' y='164' font-family='sans-serif' font-size='12'>2.16503</text>
+<path d='M70 80 H850' stroke='#ddd'/><text x='15' y='84' font-family='sans-serif' font-size='12'>2.70629</text>
+<polyline fill='none' stroke='#1259a5' stroke-width='3' points='70,465.22 330,453.918 590,386.77 850,135.746 '/>
+<path d='M70 464.462 V465.977' stroke='#1259a5'/>
+<circle cx='70' cy='465.22' r='4' fill='#1259a5'/>
+<path d='M330 452.043 V455.794' stroke='#1259a5'/>
+<circle cx='330' cy='453.918' r='4' fill='#1259a5'/>
+<path d='M590 359.905 V413.634' stroke='#1259a5'/>
+<circle cx='590' cy='386.77' r='4' fill='#1259a5'/>
+<path d='M850 80 V191.492' stroke='#1259a5'/>
+<circle cx='850' cy='135.746' r='4' fill='#1259a5'/>
+<text x='600' y='60' fill='#1259a5' font-family='sans-serif'>AVL select</text>
+<polyline fill='none' stroke='#c44914' stroke-width='3' points='70,476.092 330,471.997 590,459.369 850,321.896 '/>
+<path d='M70 475.914 V476.27' stroke='#c44914'/>
+<circle cx='70' cy='476.092' r='4' fill='#c44914'/>
+<path d='M330 471.691 V472.302' stroke='#c44914'/>
+<circle cx='330' cy='471.997' r='4' fill='#c44914'/>
+<path d='M590 451.598 V467.14' stroke='#c44914'/>
+<circle cx='590' cy='459.369' r='4' fill='#c44914'/>
+<path d='M850 287.135 V356.657' stroke='#c44914'/>
+<circle cx='850' cy='321.896' r='4' fill='#c44914'/>
+<text x='600' y='82' fill='#c44914' font-family='sans-serif'>Fenwick select score</text>
+<polyline fill='none' stroke='#6694c7' stroke-width='3' stroke-dasharray='7 5' points=''/>
+<path d='M70 465.22 V465.22' stroke='#6694c7'/>
+<circle cx='70' cy='465.22' r='4' fill='#6694c7'/>
+<path d='M330 460.293 V460.293' stroke='#6694c7'/>
+<circle cx='330' cy='460.293' r='4' fill='#6694c7'/>
+<path d='M590 455.366 V455.366' stroke='#6694c7'/>
+<circle cx='590' cy='455.366' r='4' fill='#6694c7'/>
+<path d='M850 450.439 V450.439' stroke='#6694c7'/>
+<circle cx='850' cy='450.439' r='4' fill='#6694c7'/>
+<text x='600' y='104' fill='#6694c7' font-family='sans-serif'>AVL log shape</text>
+<polyline fill='none' stroke='#e39a74' stroke-width='3' stroke-dasharray='7 5' points=''/>
+<path d='M70 476.092 V476.092' stroke='#e39a74'/>
+<circle cx='70' cy='476.092' r='4' fill='#e39a74'/>
+<path d='M330 474.789 V474.789' stroke='#e39a74'/>
+<circle cx='330' cy='474.789' r='4' fill='#e39a74'/>
+<path d='M590 473.486 V473.486' stroke='#e39a74'/>
+<circle cx='590' cy='473.486' r='4' fill='#e39a74'/>
+<path d='M850 472.184 V472.184' stroke='#e39a74'/>
+<circle cx='850' cy='472.184' r='4' fill='#e39a74'/>
+<text x='600' y='126' fill='#e39a74' font-family='sans-serif'>Fenwick log shape</text>
+</svg>

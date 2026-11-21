@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Project 2: Rank Queries on a Live Leaderboard</title>
+<style>
+@page { size: 13.333in 7.5in; margin: 0; }
+* { box-sizing: border-box; }
+body { margin: 0; font-family: Arial, sans-serif; color: #142b45; }
+.slide { width: 13.333in; height: 7.5in; padding: .65in .82in; break-after: page; position: relative; overflow: hidden; background: white; }
+.slide:last-child { break-after: auto; }
+h1 { font-size: 44pt; line-height: 1.09; margin: .65in 0 .35in; }
+h2 { font-size: 31pt; line-height: 1.13; margin: 0 0 .28in; }
+h3 { font-size: 20pt; margin: .24in 0 .08in; }
+p, li { font-size: 20pt; line-height: 1.27; }
+p { margin: .13in 0; }
+ul { margin: .13in 0; padding-left: .32in; }
+li { margin: .12in 0; }
+small, .note { font-size: 13pt; color: #526474; }
+.note { position: absolute; left: .82in; bottom: .36in; right: .82in; }
+.accent { color: #c05b28; }
+.rule { width: 2.2in; height: .07in; background: #c05b28; margin: .4in 0; }
+table { border-collapse: collapse; width: 100%; margin: .2in 0; font-size: 19pt; }
+th, td { padding: .14in .18in; text-align: left; border-bottom: 1px solid #bdcbd7; }
+th { color: #526474; font-weight: 600; font-size: 16pt; }
+.big { font-size: 29pt; font-weight: 700; color: #173f68; }
+.two { display: grid; grid-template-columns: 1fr 1fr; gap: .55in; }
+.chart { display: block; max-width: 100%; height: 4.95in; margin: 0 auto; }
+.code { font-family: Consolas, monospace; font-size: 20pt; line-height: 1.4; background: #f2f5f8; padding: .25in; white-space: pre-wrap; }
+</style>
+</head>
+<body>
+<section class="slide" id="slide1">
+  <h1>Rank Queries on a<br>Live Leaderboard</h1>
+  <div class="rule"></div>
+  <p class="big">Project 2 · Team Big_O(6)</p>
+  <p>CS 253 / MA 253</p>
+  <p class="note">Source: Project 2 description, repository implementation, and measured results in results/raw/full.csv.</p>
+</section>
+
+<section class="slide" id="slide2">
+  <h2>One million players, changing scores</h2>
+  <p>The service answers a player's rank and lists exact positions such as 40–50 while scores are revised.</p>
+  <p>At season rollover it splits by score threshold and merges regional leagues.</p>
+  <h3>Competition rank shares ties</h3>
+  <table>
+    <tr><th>Scores in order</th><td>90</td><td>80</td><td>80</td><td>70</td></tr>
+    <tr><th>Competition rank</th><td>1</td><td>2</td><td>2</td><td>4</td></tr>
+  </table>
+  <p class="note">Player ID breaks ties for position order. Rank counts only strictly higher scores.</p>
+</section>
+
+<section class="slide" id="slide3">
+  <h2>Three structures stay synchronized</h2>
+  <h3>AVL tree</h3><p>Stores complete (score, player ID) entries, subtree sizes, and heights. It supplies exact positions and structural split/join.</p>
+  <h3>Fenwick tree</h3><p>Stores counts over known score coordinates. It supplies rank and selected score through prefix sums and binary lifting.</p>
+  <h3>Player hash table</h3><p>Maps each ID to its current score so a revision can remove the old entry from both structures.</p>
+  <p class="note">The application audit checks matching player counts and entries across all three structures.</p>
+</section>
+
+<section class="slide" id="slide4">
+  <h2>Why AVL split stays logarithmic</h2>
+  <p>Join descends the taller boundary spine until the pivot fits, then repairs balance and subtree sizes.</p>
+  <p>Split follows one search path. Each path node joins its untouched subtree with one assembled side.</p>
+  <p class="big">Σ join costs ≤ 4H per side, H = O(log n)</p>
+  <p>The height differences telescope. The public join also checks boundary ordering; arbitrary league merges insert players individually.</p>
+  <p class="note">Proofs: D1 and D5 in docs/derivations/. Code: Avl::join_nodes and Avl::split_node.</p>
+</section>
+
+<section class="slide" id="slide5">
+  <h2>Correctness checks passed</h2>
+  <table>
+    <tr><th>Check</th><th>Scale and result</th></tr>
+    <tr><td>Sorted-array differential test</td><td>1,000,000 operations, seed 253: pass</td></tr>
+    <tr><td>Adversarial AVL audit</td><td>10,000 nodes: pass</td></tr>
+    <tr><td>Live application replay</td><td>1,000,000 players and revisions: pass</td></tr>
+    <tr><td>Season operation</td><td>499,336 / 500,664 split, merged back to 1,000,000</td></tr>
+  </table>
+  <p class="note">The oracle uses a bounded ID pool of 1,000; the separate replay tests the million-player scale.</p>
+</section>
+
+<section class="slide" id="slide6">
+  <h2>Rank latency as the board grows</h2>
+  <img class="chart" src="../../results/figures/full_rank.svg" alt="Rank latency chart">
+  <p class="note">At 1,000,000 players: AVL 2.069 µs, Fenwick 0.640 µs per rank. Five trials per point; dashed curves show model shapes anchored at n=1,000. Raw data: results/raw/full.csv.</p>
+</section>
+
+<section class="slide" id="slide7">
+  <h2>Split cost shows the rebuild limit</h2>
+  <img class="chart" src="../../results/figures/full_split.svg" alt="Split cost chart">
+  <p class="note">At 1,000,000 players: isolated AVL split 2.564 µs, two Fenwick rebuilds 186,554 µs. Application split also rebuilds hash and Fenwick state. Raw data: results/raw/full.csv.</p>
+</section>
+
+<section class="slide" id="slide8">
+  <h2>What the measurements establish</h2>
+  <div class="two">
+    <div>
+      <h3>Select</h3>
+      <p>At one million players, AVL selected a player entry in 2.329 µs. Fenwick selected a score in 1.070 µs.</p>
+    </div>
+    <div>
+      <h3>Join</h3>
+      <p>Ordered AVL join averaged 0.200 µs. Rebuilding combined Fenwick counts averaged 164,618 µs.</p>
+    </div>
+  </div>
+  <p>The operations have different outputs and preconditions. These timings describe isolated structure work, not complete application requests.</p>
+  <p class="note">Five-trial means from results/raw/full.csv; machine and spread are documented in REPORT.md.</p>
+</section>
+
+<section class="slide" id="slide9">
+  <h2>Fresh-clone demonstration</h2>
+  <p class="code">bash scripts/build.sh
+bash tests/run_tests.sh
+bash scripts/run_all.sh</p>
+  <p>The test command checks one million differential operations. The full run replays one million players and revisions, then regenerates the raw benchmark CSV and four figures.</p>
+  <p class="note">README.md gives the original PowerShell CSV query workflow and the current evaluation interface.</p>
+</section>
+</body>
+</html>

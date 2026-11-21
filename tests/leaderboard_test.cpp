@@ -1,4 +1,4 @@
-#include "app/leaderboard.hpp"
+#include "include/leaderboard.hpp"
 #include <cassert>
 #include <stdexcept>
 
